@@ -263,6 +263,35 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .ritem .rt b{color:var(--ink)}
 .ritem .rt .rsrc{display:block;font-size:11px;color:var(--ink-3);margin-top:3px}
 
+/* note bar + clear button */
+.notebar{display:flex;gap:12px;align-items:flex-start;background:var(--tv-soft);border:1px solid color-mix(in srgb,var(--tv) 22%,transparent);
+  border-radius:11px;padding:13px 15px;margin:2px 0 16px;font-size:12.8px;color:var(--ink-2);line-height:1.5}
+.notebar .nb-ico{flex:none;width:26px;height:26px;border-radius:8px;background:var(--tv);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.notebar b{color:var(--ink)}
+.clearbtn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:640;
+  color:#fff;background:var(--pod);border-radius:10px;padding:10px 16px;white-space:nowrap;transition:transform .12s,filter .12s}
+.clearbtn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.clearbtn:active{transform:translateY(0)}
+.clearbtn:focus-visible{outline:2px solid var(--pod);outline-offset:2px}
+@keyframes softpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--pod) 42%,transparent)}70%{box-shadow:0 0 0 11px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.clearbtn.pulse{animation:softpulse 2.6s infinite}
+@media(prefers-reduced-motion:reduce){.clearbtn.pulse{animation:none}}
+
+/* author */
+.author{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+@media(max-width:620px){.author{grid-template-columns:1fr}}
+.avatar{width:66px;height:66px;border-radius:16px;background:linear-gradient(135deg,var(--pod),var(--tv));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:750;letter-spacing:.02em;box-shadow:var(--shadow)}
+.author .aname{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.author .arole{font-size:13px;color:var(--ink-3);margin-top:2px}
+.channels{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.channels a{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink);text-decoration:none;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 10px;transition:border-color .12s,transform .12s}
+.channels a:hover{border-color:var(--acc,var(--tv));transform:translateY(-1px)}
+.channels a i{width:9px;height:9px;border-radius:50%;background:var(--acc,var(--tv))}
+.contactline{margin-top:14px;font-size:13px;color:var(--ink-2)}
+.contactline a{font-weight:640}
+
 /* tooltip */
 #tt{position:fixed;z-index:80;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;
   padding:7px 10px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;transition:opacity .12s;max-width:240px;line-height:1.45}
@@ -352,7 +381,14 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
         <h3>Vrednost po omrežjih</h3>
         <span class="muted" style="font-size:12px;margin-left:auto">na epizodo · doseg, utež &amp; CPM uredljivi</span>
       </div>
-      <div class="body" style="padding-top:6px">
+      <div class="body" style="padding-top:14px">
+        <div class="notebar">
+          <span class="nb-ico">✎</span>
+          <div><b>Prikazani so podatki podcasta Macarol Show.</b> Cene (CPM) temeljijo na trenutnem ceniku in paketih za oglaševalce tega podcasta. Za lastno vrednotenje preprosto <b>prepiši dosege in CPM</b> v poljih spodaj — ali klikni <b>Počisti polja</b> in začni s praznim listom. Vsak avtor lahko svoje cene postavi drugače.</div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+          <button class="clearbtn pulse" id="clearfields" title="Počisti dosege in vpiši svoje">✨ Počisti polja — vpiši svoje podatke</button>
+        </div>
         <div class="tbl-scroll">
           <table class="data" id="ptable">
             <thead>
@@ -627,8 +663,36 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
     </div></div>
   </section>
 
+  <!-- AUTHOR -->
+  <section class="block" id="avtor">
+    <div class="block-h"><div><h2>Avtor &amp; podcast</h2></div></div>
+    <div class="panel"><div class="body">
+      <div class="author">
+        <div class="avatar">JM</div>
+        <div>
+          <div class="aname">Jan Macarol</div>
+          <div class="arole">Voditelj <b>Macarol Show</b> · pogovori o prihodnosti, ki se zgodijo danes · City Magazine</div>
+          <div class="channels">
+            <a href="https://www.youtube.com/@janmacarol" target="_blank" rel="noopener" style="--acc:var(--f-youtube)"><i></i>YouTube</a>
+            <a href="https://open.spotify.com/show/4MSL21EN8KrDhulQEFfNBJ" target="_blank" rel="noopener" style="--acc:var(--f-audio)"><i></i>Spotify</a>
+            <a href="https://podcasts.apple.com/si/podcast/macarol-show-pogovori-o-prihodnosti-ki-se-zgodijo-danes/id1875981574" target="_blank" rel="noopener" style="--acc:var(--f-audio)"><i></i>Apple Podcasts</a>
+            <a href="https://www.facebook.com/janmacarol" target="_blank" rel="noopener" style="--acc:var(--f-facebook)"><i></i>Facebook</a>
+            <a href="https://www.instagram.com/janmacarol/" target="_blank" rel="noopener" style="--acc:var(--f-instagram)"><i></i>Instagram</a>
+            <a href="https://www.linkedin.com/in/janmacarol/" target="_blank" rel="noopener" style="--acc:var(--f-linkedin)"><i></i>LinkedIn</a>
+            <a href="https://www.tiktok.com/@janmacarol" target="_blank" rel="noopener" style="--acc:var(--f-tiktok)"><i></i>TikTok</a>
+            <a href="https://x.com/JMacarolV" target="_blank" rel="noopener" style="--acc:var(--f-x)"><i></i>X / Twitter</a>
+          </div>
+          <div class="contactline">Oglaševanje &amp; sodelovanja: <a href="mailto:janja.prijatelj@citymagazine.si">janja.prijatelj@citymagazine.si</a> (Janja Prijatelj, producentka)</div>
+        </div>
+      </div>
+      <div class="disclaimer" style="margin-top:20px">
+        <b>O orodju.</b> To je <b>osnovno orodje za medijsko planiranje</b>, namenjeno argumentaciji vrednosti pojavnosti na podcastu v primerjavi s TV. Privzete cene (CPM) in paketi temeljijo na <b>trenutnem ceniku podcasta Macarol Show</b> in njegovih paketih za oglaševalce; <b>vsak avtor podcasta lahko te cene postavi drugače</b>. Vsak lahko v polja vpiše svoje dosege in CPM ter dobi lastno, primerljivo vrednotenje — vrednost je prikazana tudi na 1000 kontaktov (CPM/CPT). Model ni uradni cenik nobene medijske hiše in ne nadomešča dokončne cenitve.
+      </div>
+    </div></div>
+  </section>
+
   <footer>
-    <span>Podcast × TV valuator · zgrajeno za argumentacijo vrednosti pojavnosti na slovenskem trgu.</span>
+    <span>Podcast × TV valuator · osnovno orodje za medijsko planiranje · Macarol Show / City Magazine.</span>
     <span class="muted">Vsi zneski v € · na epizodo, če ni navedeno drugače.</span>
   </footer>
 </div>
@@ -656,7 +720,7 @@ const BASE = [
   {key:'ig_story', label:'Instagram Story',       fam:'Instagram', reach:59000, cpm:5},
   {key:'tiktok',   label:'TikTok',                fam:'TikTok',    reach:24540, cpm:4},
   {key:'linkedin', label:'LinkedIn',              fam:'LinkedIn',  reach:20970, cpm:12},
-  {key:'x',        label:'X / Twitter',           fam:'X',         reach:42680, cpm:3},
+  {key:'x',        label:'X / Twitter',           fam:'X',         reach:42680, cpm:4},
   {key:'spotify',  label:'Spotify (audio)',       fam:'Audio',     reach:3586,  cpm:25},
   {key:'apple',    label:'Apple Podcasts',        fam:'Audio',     reach:2900,  cpm:25},
   {key:'audio_other',label:'Drugi audio',         fam:'Audio',     reach:1060,  cpm:18},
@@ -730,6 +794,7 @@ function render(){          // zgradi skelet tabele (vhodna polja) + izriši din
     inp.addEventListener('input',e=>{
       const i=+e.target.dataset.i, f=e.target.dataset.f;
       S.platforms[i][f]=Math.max(0,+e.target.value||0);
+      const cb=document.getElementById('clearfields'); if(cb) cb.classList.remove('pulse');
       renderExceptTableInputs();     // ne prerisujemo inputov, da ostane fokus
     });
   });
@@ -925,6 +990,16 @@ document.querySelectorAll('#uni_seg button').forEach(b=>{
 
 document.getElementById('attn').addEventListener('change',e=>{
   S.attnOn=e.target.checked; renderExceptTableInputs();
+});
+
+document.getElementById('clearfields').addEventListener('click',()=>{
+  S.preset='prazno';
+  S.platforms=clone(PRESETS.prazno.platforms);
+  document.getElementById('preset').value='prazno';
+  document.getElementById('clearfields').classList.remove('pulse');
+  render();
+  const first=document.querySelector('#ptbody input[data-f=reach]');
+  if(first){ first.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>first.focus(),300); }
 });
 
 document.getElementById('preset').addEventListener('change',e=>{
