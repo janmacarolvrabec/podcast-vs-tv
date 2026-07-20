@@ -106,6 +106,7 @@ header.top{
 
 /* ---- layout ---- */
 .grid{display:grid;grid-template-columns:340px 1fr;gap:22px;margin-top:30px;align-items:start}
+.grid>*{min-width:0}
 @media(max-width:940px){.grid{grid-template-columns:1fr}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
 .panel .head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}
@@ -159,6 +160,7 @@ table.data tr.total td:first-child{color:var(--ink)}
 
 /* ---- charts ---- */
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.chart-grid>*{min-width:0}
 @media(max-width:820px){.chart-grid{grid-template-columns:1fr}}
 .chartcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px}
 .chartcard h3{font-size:14.5px}
@@ -236,6 +238,31 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .gcard .glay b{color:var(--accent,var(--tv))}
 .gcard .gform{font-family:var(--mono);font-size:11.5px;background:var(--surface-3);color:var(--ink);padding:2px 6px;border-radius:5px;display:inline-block;margin-top:9px}
 
+/* attention toggle switch */
+.switchrow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--ink);font-weight:560;cursor:pointer;margin-bottom:6px}
+.switchrow input{appearance:none;-webkit-appearance:none;flex:none;width:40px;height:23px;border-radius:999px;background:var(--surface-3);border:1px solid var(--line-strong);position:relative;cursor:pointer;transition:.2s}
+.switchrow input::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:.2s}
+.switchrow input:checked{background:var(--tv);border-color:var(--tv)}
+.switchrow input:checked::after{left:19px}
+.switchrow input:focus-visible{outline:2px solid var(--tv);outline-offset:2px}
+
+/* attention bars (raw vs quality overlay) */
+.abar{display:grid;grid-template-columns:118px 1fr auto;align-items:center;gap:10px;margin:0 0 9px;font-size:12.5px}
+.abar .bl{color:var(--ink-2);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.atrack{height:20px;background:var(--surface-3);border-radius:5px;position:relative;overflow:hidden}
+.araw{position:absolute;left:0;top:0;height:100%;border-radius:5px;opacity:.24}
+.aqual{position:absolute;left:0;top:0;height:100%;border-radius:5px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.abar .bv{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;min-width:60px;text-align:right}
+.abar .bv small{display:block;color:var(--ink-3);font-weight:500;font-size:10.5px}
+
+/* research list */
+.rlist{display:flex;flex-direction:column;gap:15px}
+.ritem{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start}
+.ritem .rn{font-size:27px;font-weight:750;letter-spacing:-.02em;color:var(--tv);font-variant-numeric:tabular-nums;line-height:1.05}
+.ritem .rt{font-size:12.8px;color:var(--ink-2);line-height:1.5}
+.ritem .rt b{color:var(--ink)}
+.ritem .rt .rsrc{display:block;font-size:11px;color:var(--ink-3);margin-top:3px}
+
 /* tooltip */
 #tt{position:fixed;z-index:80;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;
   padding:7px 10px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;transition:opacity .12s;max-width:240px;line-height:1.45}
@@ -309,6 +336,12 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
           <div class="hint">Isti človek sledi na več omrežjih; faktor oceni delež unikatnega dosega.</div>
         </div>
 
+        <div class="ctl-grp-title">Pozornostni model</div>
+        <div class="ctl">
+          <label class="switchrow" for="attn">TV-primerjava po pozornosti <input type="checkbox" id="attn" checked></label>
+          <div class="hint">Vklopljeno: GRP in strošek na TV se računata iz <b>pozornostno ponderiranega</b> dosega — vsak stik pomnožen z utežjo platforme (stolpec <b>Utež</b> v tabeli). YouTube longplay = 1,00 (TV-referenca), drsni formati manj. Izklopljeno: iz surovega dosega.</div>
+        </div>
+
         <button class="resetbtn" id="reset">↺ Ponastavi predpostavke</button>
       </div>
     </aside>
@@ -317,7 +350,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
     <div class="panel">
       <div class="head">
         <h3>Vrednost po omrežjih</h3>
-        <span class="muted" style="font-size:12px;margin-left:auto">na epizodo · doseg &amp; CPM uredljiva</span>
+        <span class="muted" style="font-size:12px;margin-left:auto">na epizodo · doseg, utež &amp; CPM uredljivi</span>
       </div>
       <div class="body" style="padding-top:6px">
         <div class="tbl-scroll">
@@ -326,6 +359,8 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
               <tr>
                 <th>Omrežje / format</th>
                 <th>Doseg (T+30)</th>
+                <th>Utež ×</th>
+                <th>Kakov. doseg</th>
                 <th>CPM €</th>
                 <th>Medij. vrednost</th>
                 <th>GRP-ekv.</th>
@@ -337,9 +372,10 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
           </table>
         </div>
         <div class="hint" style="margin-top:12px">
-          <b>Medijska vrednost</b> = doseg × CPM ÷ 1000 (kar bi ta doseg stal po tržnih digitalnih CPM). &nbsp;
-          <b>GRP-ekv.</b> = doseg ÷ ciljna skupina × 100. &nbsp;
-          <b>Strošek na TV</b> = koliko bi enak doseg stal, če bi ga kupil prek TV (GRP-ekv. × CPP).
+          <b>Utež</b> = pozornostni koeficient platforme (koliko TV-vrednega stika prinese en ogled; YouTube longplay = 1,00). &nbsp;
+          <b>Kakov. doseg</b> = doseg × utež. &nbsp;
+          <b>Medijska vrednost</b> = doseg × CPM ÷ 1000. &nbsp;
+          <b>GRP-ekv.</b> in <b>Strošek na TV</b> se pri vklopljenem pozornostnem modelu računata iz <i>kakovostnega</i> dosega (× CPP).
         </div>
       </div>
     </div>
@@ -368,12 +404,34 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
     <div class="legend" id="fam_legend" style="margin-top:14px"></div>
   </section>
 
+  <!-- ATTENTION -->
+  <section class="block">
+    <div class="block-h">
+      <div>
+        <h2>Pozornost, ne le doseg — zato je YouTube ≈ TV</h2>
+        <p>En ogled cele epizode na YouTubu (ki v tujini nadomešča linearno TV v dnevni sobi) ni enakovreden enemu prehodu Reels med drsanjem. Zato vsak stik tehtamo s <b>pozornostnim koeficientom</b>: koliko TV-vrednega stika dejansko prinese. Poln blok = kakovostni (pozornostni) doseg, bledi rep = pozornost, ki se izgubi.</p>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="chartcard">
+        <h3>Doseg vs. kakovostni doseg</h3>
+        <div class="csub">poln = pozornostno ponderiran · bledi rep = surovi doseg</div>
+        <div id="chart_attn"></div>
+      </div>
+      <div class="chartcard">
+        <h3>Kaj kaže raziskava</h3>
+        <div class="csub">zakaj YouTube in audio nosita TV-primerljivo težo</div>
+        <div class="rlist" id="research" style="margin-top:8px"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- VERSUS -->
   <section class="block">
     <div class="block-h">
       <div>
         <h2>Podcast vs. TV — cena na tisoč kontaktov</h2>
-        <p>Ključni argument prodaje: pri istem dosegu je podcast praviloma bistveno ceneje na tisoč doseženih ljudi kot linearna TV — kar upravičuje višjo ceno pojavnosti, ne nižje.</p>
+        <p>Ko doseg izenačimo po pozornosti, se pokaže poštena primerjava: tvoj stik je vreden približno toliko kot TV stik — a z dodatnim ciljanjem in host-read zaupanjem. To upravičuje ceno <b>v TV rangu</b>, ne pod njim. (Izklopi pozornostni model levo za primerjavo na surovem dosegu.)</p>
       </div>
     </div>
     <div class="chartcard">
@@ -474,6 +532,19 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
       </article>
 
       <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Pozornostni koeficient (utež)</h4>
+        <p class="gdef">Koliko “TV-vrednega” stika prinese en ogled na tej platformi. YouTube longplay = 1,00 (kot TV), drsni formati (Reels, Shorts, Story) precej manj.</p>
+        <p class="glay"><b>Po domače:</b> ogled cele epizode v dnevni sobi ni isto kot bežen prehod Reels. Utež to razliko upošteva.</p>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Kakovostni (pozornostni) doseg</h4>
+        <p class="gdef">Doseg, ponderiran s pozornostjo — vsak stik pomnožen z utežjo platforme. To je poštena osnova za primerjavo s TV.</p>
+        <p class="glay"><b>Po domače:</b> ne šteješ, kolikokrat te je kdo “oplazil”, ampak koliko pravih, pozornih pogledov si dobil.</p>
+        <span class="gform">Σ (doseg × utež)</span>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
         <h4>Medijska vrednost</h4>
         <p class="gdef">Če bi doseg, ki ga tvoja vsebina ustvari, moral kupiti kot oglase na trgu — koliko bi te to stalo?</p>
         <p class="glay"><b>Po domače:</b> tvoja epizoda “podari” oglaševalcu toliko prostora; to je cena istega prostora po ceniku.</p>
@@ -533,6 +604,8 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
         <p>Digital (in podcast) se prodaja na <b>CPM</b> — ceno na 1000 impresij. Vsakemu omrežju/formatu pripišemo tržni CPM (uredljiv); zmnožek z dosegom da medijsko vrednost. To je konservativna, “od spodaj navzgor” ocena.</p>
         <h4>Pretvorba med valutama</h4>
         <p>Ker je 1 GRP = <code>ciljna skupina ÷ 100</code> kontaktov, velja <code>CPT = CPP × 100.000 ÷ ciljna skupina</code>. Tako sta TV in podcast primerljiva na isti osnovi — cena na tisoč doseženih.</p>
+        <h4>Pozornostno uteževanje (zakaj ne vse platforme enako)</h4>
+        <p>Doseg ni enakovreden. En ogled cele epizode na <b>YouTubu</b> — ki po Nielsenovem <i>The Gauge</i> (2025) z ~12–13 % vsega časa gledanja TV vodi pred Netflixom in je gledanost na TV zaslonu v dveh letih zrasla za 53 % — je bližje TV kot bežen prehod Reels. Meritve pozornosti (Amplified Intelligence / Adelaide / Dentsu) kažejo, da YouTube, CTV in <b>audio</b> dosegajo TV-primerljivo pozornost, medtem ko drsni formati (TikTok, Reels, display) za enako pozornost zahtevajo ~2× večji vložek. Zato vsak stik pomnožimo s <b>pozornostnim koeficientom</b>; TV-primerjava (GRP, strošek na TV) teče iz tega <b>kakovostnega dosega</b>.</p>
         <h4>Kakovostne prilagoditve</h4>
         <p>Surova impresija podceni podcast: <b>host-read integracija</b> nosi pozornost in zaupanje (pribitek), medtem ko <b>prekrivanje omrežij</b> pomeni, da seštevek stikov ni unikatni doseg (netiranje). Oba faktorja sta eksplicitna in uredljiva.</p>
         <h4>Podatkovni vzorec</h4>
@@ -546,6 +619,8 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
         <a href="https://www.24ur.com/s/Cf3gbX" target="_blank" rel="noopener">Pro Plus / POP TV — Pogoji prodaje 2026</a> ·
         <a href="https://castoola.com/sl/valute-merjenja-gledanosti-in-zakupa-tv/" target="_blank" rel="noopener">Castoola — valute merjenja gledanosti</a> ·
         <a href="https://www.rtvslo.si/files/marketing/prodajni_pogoji_2017_javna_objava-__istopis.pdf" target="_blank" rel="noopener">RTV SLO — prodajni pogoji</a> ·
+        <a href="https://www.nielsen.com/news-center/2025/youtube-maintains-largest-share-of-tv-viewing-among-media-companies-for-third-consecutive-month/" target="_blank" rel="noopener">Nielsen — The Gauge: YouTube #1 v TV gledanosti (2025)</a> ·
+        <a href="https://www.westwoodone.com/blog/2024/08/12/adelaide-attentiveness-measurement-1000-of-am-fm-radio-ads-require-2635-worth-of-facebook-ads-to-achieve-the-same-level-of-attention-audio-platforms-generate-nearly-the-same-attentiveness-as-tv/" target="_blank" rel="noopener">Amplified Intelligence / Adelaide — meritve pozornosti</a> ·
         AGB Nielsen SI · Interni benchmark vprašalnik Macarol Show (2026).
       </div>
       <div class="disclaimer" id="disclaimer"></div>
@@ -565,43 +640,33 @@ const FAMILIES = {
   YouTube:{v:'--f-youtube'}, TikTok:{v:'--f-tiktok'}, Facebook:{v:'--f-facebook'},
   Instagram:{v:'--f-instagram'}, LinkedIn:{v:'--f-linkedin'}, X:{v:'--f-x'}, Audio:{v:'--f-audio'}
 };
-const PRESETS = {
-  macarol:{
-    platforms:[
-      {key:'yt_long',  label:'YouTube — longplay',   fam:'YouTube',   reach:30600, cpm:12},
-      {key:'yt_short', label:'YouTube Shorts',        fam:'YouTube',   reach:3800,  cpm:4},
-      {key:'fb_long',  label:'Facebook — longplay',   fam:'Facebook',  reach:85940, cpm:6},
-      {key:'fb_reels', label:'Facebook Reels',        fam:'Facebook',  reach:147000,cpm:4},
-      {key:'ig_reels', label:'Instagram Reels',       fam:'Instagram', reach:132540,cpm:6},
-      {key:'ig_story', label:'Instagram Story',       fam:'Instagram', reach:59000, cpm:5},
-      {key:'tiktok',   label:'TikTok',                fam:'TikTok',    reach:24540, cpm:4},
-      {key:'linkedin', label:'LinkedIn',              fam:'LinkedIn',  reach:20970, cpm:12},
-      {key:'x',        label:'X / Twitter',           fam:'X',         reach:42680, cpm:3},
-      {key:'spotify',  label:'Spotify (audio)',       fam:'Audio',     reach:3586,  cpm:25},
-      {key:'apple',    label:'Apple Podcasts',        fam:'Audio',     reach:2900,  cpm:25},
-      {key:'audio_other',label:'Drugi audio',         fam:'Audio',     reach:1060,  cpm:18},
-    ],
-    sponsor:[1500,3500]
-  },
-  prazno:{
-    platforms:[
-      {key:'yt_long',  label:'YouTube — longplay',   fam:'YouTube',   reach:0, cpm:12},
-      {key:'yt_short', label:'YouTube Shorts',        fam:'YouTube',   reach:0, cpm:4},
-      {key:'fb_long',  label:'Facebook — longplay',   fam:'Facebook',  reach:0, cpm:6},
-      {key:'fb_reels', label:'Facebook Reels',        fam:'Facebook',  reach:0, cpm:4},
-      {key:'ig_reels', label:'Instagram Reels',       fam:'Instagram', reach:0, cpm:6},
-      {key:'ig_story', label:'Instagram Story',       fam:'Instagram', reach:0, cpm:5},
-      {key:'tiktok',   label:'TikTok',                fam:'TikTok',    reach:0, cpm:4},
-      {key:'linkedin', label:'LinkedIn',              fam:'LinkedIn',  reach:0, cpm:12},
-      {key:'x',        label:'X / Twitter',           fam:'X',         reach:0, cpm:3},
-      {key:'spotify',  label:'Spotify (audio)',       fam:'Audio',     reach:0, cpm:25},
-      {key:'apple',    label:'Apple Podcasts',        fam:'Audio',     reach:0, cpm:25},
-      {key:'audio_other',label:'Drugi audio',         fam:'Audio',     reach:0, cpm:18},
-    ],
-    sponsor:[0,0]
-  }
+/* pozornostni koeficient (utež): YouTube longplay = 1,00 = TV-referenca.
+   Podlaga: Nielsen The Gauge (YouTube #1 v TV gledanosti), meritve pozornosti
+   Amplified Intelligence / Adelaide / Dentsu (audio ≈ TV; drsni formati ~0,5× pozornosti). */
+const COEF = {
+  yt_long:1.00, yt_short:0.35, fb_long:0.55, fb_reels:0.28, ig_reels:0.32, ig_story:0.22,
+  tiktok:0.35, linkedin:0.50, x:0.18, spotify:0.85, apple:0.85, audio_other:0.80
 };
-const DEFAULTS = {universe:900000, cpp:120, spot:3000, integ:1.3, dedup:0.8};
+const BASE = [
+  {key:'yt_long',  label:'YouTube — longplay',   fam:'YouTube',   reach:30600, cpm:12},
+  {key:'yt_short', label:'YouTube Shorts',        fam:'YouTube',   reach:3800,  cpm:4},
+  {key:'fb_long',  label:'Facebook — longplay',   fam:'Facebook',  reach:85940, cpm:6},
+  {key:'fb_reels', label:'Facebook Reels',        fam:'Facebook',  reach:147000,cpm:4},
+  {key:'ig_reels', label:'Instagram Reels',       fam:'Instagram', reach:132540,cpm:6},
+  {key:'ig_story', label:'Instagram Story',       fam:'Instagram', reach:59000, cpm:5},
+  {key:'tiktok',   label:'TikTok',                fam:'TikTok',    reach:24540, cpm:4},
+  {key:'linkedin', label:'LinkedIn',              fam:'LinkedIn',  reach:20970, cpm:12},
+  {key:'x',        label:'X / Twitter',           fam:'X',         reach:42680, cpm:3},
+  {key:'spotify',  label:'Spotify (audio)',       fam:'Audio',     reach:3586,  cpm:25},
+  {key:'apple',    label:'Apple Podcasts',        fam:'Audio',     reach:2900,  cpm:25},
+  {key:'audio_other',label:'Drugi audio',         fam:'Audio',     reach:1060,  cpm:18},
+];
+const mkPlatforms = (empty)=>BASE.map(p=>({...p, coef:COEF[p.key], reach: empty?0:p.reach}));
+const PRESETS = {
+  macarol:{platforms:mkPlatforms(false), sponsor:[1500,3500]},
+  prazno: {platforms:mkPlatforms(true),  sponsor:[0,0]}
+};
+const DEFAULTS = {universe:900000, cpp:120, spot:3000, integ:1.3, dedup:0.8, attnOn:true};
 
 /* ---------- stanje ---------- */
 let S = {preset:'macarol', platforms:clone(PRESETS.macarol.platforms), ...clone(DEFAULTS)};
@@ -618,92 +683,126 @@ const cssv=k=>getComputedStyle(document.body).getPropertyValue(k).trim();
 
 /* ---------- izračun ---------- */
 function compute(){
-  const uni=S.universe, cpp=S.cpp;
+  const uni=S.universe, cpp=S.cpp, attn=S.attnOn;
   const cpt = cpp*100000/uni;                 // € na 1000 kontaktov na TV
-  let reach=0, media=0;
+  let reach=0, qreach=0, media=0;
   const rows = S.platforms.map(p=>{
     const value=p.reach*p.cpm/1000;
-    const grp=p.reach/uni*100;
+    const qr=p.reach*p.coef;                   // kakovostni (pozornostni) doseg
+    const basis=attn? qr : p.reach;
+    const grp=basis/uni*100;
     const tv=grp*cpp;
-    reach+=p.reach; media+=value;
-    return {...p, value, grp, tv};
+    reach+=p.reach; qreach+=qr; media+=value;
+    return {...p, value, qr, grp, tv};
   });
-  const grpTotal = reach/uni*100;
-  const tvMatch  = grpTotal*cpp;              // strošek enakega dosega na TV
-  const effCPM   = reach? media/reach*1000 : 0;
+  const basisTotal = attn? qreach : reach;
+  const grpTotal = basisTotal/uni*100;
+  const tvMatch  = grpTotal*cpp;              // strošek (pozornostno) enakega dosega na TV
+  const effCPM   = basisTotal? media/basisTotal*1000 : 0; // cena na 1000 (kakov./surovih) stikov
+  const rawCPM   = reach? media/reach*1000 : 0;
+  const qCPM     = qreach? media/qreach*1000 : 0;
+  const util     = reach? qreach/reach : 0;   // povprečna utež
   const netReach = reach*S.dedup;
-  const recMid   = media*S.integ;
   const recLow   = media*0.9;
   const recHigh  = media*S.integ*1.12;
-  const efficiency = effCPM? cpt/effCPM : 0;  // kolikokrat ceneje je podcast na 1000
+  const ratio    = effCPM? cpt/effCPM : 0;    // >1 = podcast ceneje na 1000, <1 = dražje
   const spots    = S.spot? tvMatch/S.spot : 0;
-  return {rows,reach,media,cpt,grpTotal,tvMatch,effCPM,netReach,recMid,recLow,recHigh,efficiency,spots,uni,cpp};
+  return {rows,reach,qreach,media,cpt,grpTotal,tvMatch,basisTotal,effCPM,rawCPM,qCPM,util,netReach,recLow,recHigh,ratio,spots,uni,cpp,attn};
 }
 
 /* ---------- render ---------- */
-function render(){
+function render(){          // zgradi skelet tabele (vhodna polja) + izriši dinamiko
+  const tb=document.getElementById('ptbody'); tb.innerHTML='';
+  S.platforms.forEach((p,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML =
+      `<td class="name"><span class="chip" style="background:${cssv(FAMILIES[p.fam].v)}"></span>${p.label}</td>
+       <td><input class="edit" type="number" min="0" step="100" data-i="${i}" data-f="reach" value="${p.reach}"></td>
+       <td><input class="edit" type="number" min="0" max="1.5" step="0.05" data-i="${i}" data-f="coef" value="${p.coef}"></td>
+       <td class="cellnum"></td>
+       <td><input class="edit" type="number" min="0" step="0.5" data-i="${i}" data-f="cpm" value="${p.cpm}"></td>
+       <td class="cellnum val-eur"></td>
+       <td class="cellnum"></td>
+       <td class="cellnum val-tv"></td>`;
+    tb.appendChild(tr);
+  });
+  tb.querySelectorAll('input.edit').forEach(inp=>{
+    inp.addEventListener('input',e=>{
+      const i=+e.target.dataset.i, f=e.target.dataset.f;
+      S.platforms[i][f]=Math.max(0,+e.target.value||0);
+      renderExceptTableInputs();     // ne prerisujemo inputov, da ostane fokus
+    });
+  });
+  drawLegend();
+  renderExceptTableInputs();
+}
+
+/* izriši vse razen vhodnih polj tabele */
+function renderExceptTableInputs(){
   const d = compute();
+  const cheaper = d.ratio>=1;
+  const podU = d.attn? 'efektivni CPM / 1000 pozornostnih stikov' : 'efektivni CPM / 1000 stikov';
 
   /* KPI */
   document.getElementById('kpis').innerHTML = [
-    kpi('pod','Doseg / epizoda', N(d.reach), 'stikov (seštevek platform)'),
+    kpi('pod','Doseg / epizoda', N(d.reach), 'surovih stikov · pozornostnih ≈ '+N(d.qreach)),
     kpi('pod','Bruto medijska vrednost', EUR(d.media), 'na epizodo, tržni CPM'),
-    kpi('tv','TV-ekvivalent', nf1.format(d.grpTotal)+' <span class="cur">GRP</span>', '= '+EUR(d.tvMatch)+' na TV'),
+    kpi('tv','TV-ekvivalent', nf1.format(d.grpTotal)+' <span class="cur">GRP</span>', (d.attn?'pozornostno · ':'')+'= '+EUR(d.tvMatch)+' na TV'),
     kpi('pod','Priporočena cena', EUR(d.recLow)+'–'+EUR(d.recHigh), 'sponzorstvo / epizoda'),
   ].join('');
 
-  /* tabela */
-  const tb=document.getElementById('ptbody'); tb.innerHTML='';
+  /* izračunane celice tabele */
+  const cells = document.querySelectorAll('#ptbody tr');
   d.rows.forEach((r,i)=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML =
-      `<td class="name"><span class="chip" style="background:${cssv(FAMILIES[r.fam].v)}"></span>${r.label}</td>
-       <td><input class="edit" type="number" min="0" step="100" data-i="${i}" data-f="reach" value="${r.reach}"></td>
-       <td><input class="edit" type="number" min="0" step="0.5" data-i="${i}" data-f="cpm" value="${r.cpm}"></td>
-       <td class="cellnum val-eur">${EUR(r.value)}</td>
-       <td class="cellnum">${nf1.format(r.grp)}</td>
-       <td class="cellnum val-tv">${EUR(r.tv)}</td>`;
-    tb.appendChild(tr);
+    const tds=cells[i].querySelectorAll('td');
+    tds[3].textContent=N(r.qr);
+    tds[5].textContent=EUR(r.value);
+    tds[6].textContent=nf1.format(r.grp);
+    tds[7].textContent=EUR(r.tv);
   });
   document.getElementById('ptfoot').innerHTML =
     `<tr class="total">
        <td>Skupaj / epizoda</td>
        <td class="cellnum">${N(d.reach)}</td>
-       <td class="cellnum muted">ø ${nf1.format(d.effCPM)}</td>
+       <td class="cellnum muted">ø ${nf2.format(d.util)}</td>
+       <td class="cellnum">${N(d.qreach)}</td>
+       <td class="cellnum muted">ø ${nf1.format(d.attn?d.qCPM:d.rawCPM)}</td>
        <td class="cellnum val-eur">${EUR(d.media)}</td>
        <td class="cellnum">${nf1.format(d.grpTotal)}</td>
        <td class="cellnum val-tv">${EUR(d.tvMatch)}</td>
      </tr>`;
-  tb.querySelectorAll('input.edit').forEach(inp=>{
-    inp.addEventListener('input',e=>{
-      const i=+e.target.dataset.i, f=e.target.dataset.f;
-      S.platforms[i][f]=Math.max(0,+e.target.value||0);
-      renderExceptTableInputs(); // ne prerisujemo inputov, da fokus ostane
-    });
-  });
 
   /* grafi */
   drawBars('chart_reach', d.rows.map(r=>({label:r.label,val:r.reach,fam:r.fam})), v=>N(v), 'stikov');
   drawBars('chart_value', d.rows.map(r=>({label:r.label,val:r.value,fam:r.fam})), v=>EUR(v), 'medijske vrednosti');
-  drawLegend();
+  drawAttnBars('chart_attn', d.rows);
+
+  /* raziskava */
+  document.getElementById('research').innerHTML = [
+    rItem('12–13 %','<b>YouTube je #1 v TV gledanosti</b> med vsemi mediji (ZDA) — več časa gledanja kot Netflix ali katerakoli druga storitev.<span class="rsrc">Nielsen — The Gauge, 2025</span>'),
+    rItem('+53 %','rast gledanosti <b>YouTuba na TV zaslonu</b> v dveh letih; dnevna soba je najhitreje rastoč zaslon.<span class="rsrc">Nielsen — The Gauge, 2025</span>'),
+    rItem('~2×','večji vložek je na <b>TikToku, Reels in displayu</b> potreben za enako pozornost kot na YouTubu, CTV ali audiu.<span class="rsrc">Amplified Intelligence / Adelaide / Dentsu</span>'),
+  ].join('');
 
   /* versus */
   document.getElementById('versus').innerHTML =
     `<div class="vs-col pod">
         <div class="k">Podcast</div>
         <div class="big">${EUR2(d.effCPM)}</div>
-        <div class="u">efektivni CPM / 1000 stikov</div>
+        <div class="u">${podU}</div>
      </div>
-     <div class="vs-mid"><div class="ratio"><b>${nf1.format(d.efficiency)}×</b><small>ceneje</small></div></div>
+     <div class="vs-mid"><div class="ratio"><b>${nf1.format(cheaper?d.ratio:(d.effCPM/d.cpt||0))}×</b><small>${cheaper?'ceneje':'dražje'}</small></div></div>
      <div class="vs-col tv">
         <div class="k">Linearna TV</div>
         <div class="big">${EUR2(d.cpt)}</div>
         <div class="u">CPT / 1000 kontaktov (CPP ${EUR(d.cpp)})</div>
      </div>`;
   document.getElementById('callouts').innerHTML = [
-    callout('pod', EUR(d.media), 'bruto medijske vrednosti dostavi ena epizoda — pri realiziranem dosegu čez vsa omrežja.'),
-    callout('tv', EUR(d.tvMatch), 'bi stal enak doseg, če bi ga sponzor kupoval prek linearne TV ('+nf1.format(d.grpTotal)+' GRP × CPP).'),
-    callout('good', nf1.format(d.efficiency)+'×', 'bolj stroškovno učinkovit je podcast na tisoč doseženih — argument za ceno v TV rangu, ne pod njim.'),
+    callout('pod', N(d.qreach), 'pozornostno ponderiranih (TV-vrednih) stikov na epizodo — '+nf0.format(d.util*100)+' % surovega dosega '+N(d.reach)+'.'),
+    callout('tv', EUR(d.tvMatch), 'bi stal enak '+(d.attn?'pozornostni ':'')+'doseg na TV ('+nf1.format(d.grpTotal)+' GRP × CPP '+EUR(d.cpp)+').'),
+    cheaper
+      ? callout('good', nf1.format(d.ratio)+'×', 'ceneje je podcast na tisoč '+(d.attn?'pozornostnih ':'')+'stikov od TV — argument za ceno vsaj v TV rangu.')
+      : callout('good', nf1.format(d.effCPM/d.cpt)+'×', 'razmerje pozornostne cene proti TV — praktično parnost; s ciljanjem in host-read zaupanjem to upravičuje TV-nivo cene.'),
   ].join('');
 
   /* build-up */
@@ -717,49 +816,10 @@ function render(){
   /* TV jezik */
   document.getElementById('tvlang').innerHTML = tvLang(d);
 
-  /* kontrolne izpisane vrednosti */
+  /* kontrolni izpisi */
   document.getElementById('cpt_out').textContent = EUR2(d.cpt);
   document.getElementById('disclaimer').innerHTML =
-    `<b>Opomba o podatkih:</b> privzeti doseg je povprečje 5 epizod oddaje Macarol Show (T+30, seštevek stikov — ne unikatni doseg). Trenutna dogovorjena cena glavnega sponzorja je bila <b>€1.500–3.500 / epizodo</b>; model pri teh predpostavkah oceni medijsko vrednost na <b>${EUR(d.media)}</b> in priporočeni razpon <b>${EUR(d.recLow)}–${EUR(d.recHigh)}</b>, kar nakazuje prostor za dvig cene ob transparentni argumentaciji.`;
-}
-
-/* delni render brez prerisovanja input polj (ohrani fokus med tipkanjem) */
-function renderExceptTableInputs(){
-  const d = compute();
-  document.getElementById('kpis').innerHTML = [
-    kpi('pod','Doseg / epizoda', N(d.reach), 'stikov (seštevek platform)'),
-    kpi('pod','Bruto medijska vrednost', EUR(d.media), 'na epizodo, tržni CPM'),
-    kpi('tv','TV-ekvivalent', nf1.format(d.grpTotal)+' <span class="cur">GRP</span>', '= '+EUR(d.tvMatch)+' na TV'),
-    kpi('pod','Priporočena cena', EUR(d.recLow)+'–'+EUR(d.recHigh), 'sponzorstvo / epizoda'),
-  ].join('');
-  // posodobi le izračunane celice v tabeli
-  const cells = document.querySelectorAll('#ptbody tr');
-  d.rows.forEach((r,i)=>{
-    const tds=cells[i].querySelectorAll('td');
-    tds[3].textContent=EUR(r.value); tds[4].textContent=nf1.format(r.grp); tds[5].textContent=EUR(r.tv);
-  });
-  document.getElementById('ptfoot').innerHTML =
-    `<tr class="total"><td>Skupaj / epizoda</td><td class="cellnum">${N(d.reach)}</td>
-      <td class="cellnum muted">ø ${nf1.format(d.effCPM)}</td><td class="cellnum val-eur">${EUR(d.media)}</td>
-      <td class="cellnum">${nf1.format(d.grpTotal)}</td><td class="cellnum val-tv">${EUR(d.tvMatch)}</td></tr>`;
-  drawBars('chart_reach', d.rows.map(r=>({label:r.label,val:r.reach,fam:r.fam})), v=>N(v), 'stikov');
-  drawBars('chart_value', d.rows.map(r=>({label:r.label,val:r.value,fam:r.fam})), v=>EUR(v), 'medijske vrednosti');
-  document.getElementById('versus').innerHTML =
-    `<div class="vs-col pod"><div class="k">Podcast</div><div class="big">${EUR2(d.effCPM)}</div><div class="u">efektivni CPM / 1000 stikov</div></div>
-     <div class="vs-mid"><div class="ratio"><b>${nf1.format(d.efficiency)}×</b><small>ceneje</small></div></div>
-     <div class="vs-col tv"><div class="k">Linearna TV</div><div class="big">${EUR2(d.cpt)}</div><div class="u">CPT / 1000 kontaktov (CPP ${EUR(d.cpp)})</div></div>`;
-  document.getElementById('callouts').innerHTML = [
-    callout('pod', EUR(d.media), 'bruto medijske vrednosti dostavi ena epizoda — pri realiziranem dosegu čez vsa omrežja.'),
-    callout('tv', EUR(d.tvMatch), 'bi stal enak doseg, če bi ga sponzor kupoval prek linearne TV ('+nf1.format(d.grpTotal)+' GRP × CPP).'),
-    callout('good', nf1.format(d.efficiency)+'×', 'bolj stroškovno učinkovit je podcast na tisoč doseženih — argument za ceno v TV rangu, ne pod njim.'),
-  ].join('');
-  document.getElementById('buildup').innerHTML = `
-    ${buRow('base','Bruto medijska vrednost','<b>doseg × CPM</b> po vseh omrežjih', EUR(d.media),'')}
-    ${buRow('add','+ Host-read integracija','pribitek ×'+nf2.format(S.integ), '+'+EUR(d.media*S.integ-d.media),'')}
-    ${buRow('cut','Kontrolni razpon (–/+)','pogajalsko okno', '±'+EUR((d.recHigh-d.recLow)/2),'')}
-    ${buRow('res','Priporočena cena / epizoda','sponzorski paket', EUR(d.recLow)+' – '+EUR(d.recHigh),'')}`;
-  document.getElementById('tvlang').innerHTML = tvLang(d);
-  document.getElementById('cpt_out').textContent = EUR2(d.cpt);
+    `<b>Opomba o podatkih:</b> privzeti doseg je povprečje 5 epizod oddaje Macarol Show (T+30, seštevek stikov — ne unikatni doseg). Ob vklopljenem pozornostnem modelu znaša kakovostni doseg <b>${N(d.qreach)}</b> (ø utež ×${nf2.format(d.util)}). Trenutna dogovorjena cena glavnega sponzorja je bila <b>€1.500–3.500 / epizodo</b>; model oceni medijsko vrednost na <b>${EUR(d.media)}</b> in priporočeni razpon <b>${EUR(d.recLow)}–${EUR(d.recHigh)}</b>, kar nakazuje prostor za dvig cene ob transparentni argumentaciji.`;
 }
 
 /* ---------- komponente ---------- */
@@ -788,13 +848,34 @@ function drawLegend(){
   document.getElementById('fam_legend').innerHTML =
     Object.keys(FAMILIES).map(f=>`<span><i style="background:${cssv(FAMILIES[f].v)}"></i>${f}</span>`).join('');
 }
+function drawAttnBars(id, rows){
+  const max=Math.max(1,...rows.map(r=>r.reach));
+  const host=document.getElementById(id);
+  host.innerHTML=rows.map(r=>{
+    const c=cssv(FAMILIES[r.fam].v);
+    const rawW=(r.reach/max*100).toFixed(1);
+    const qW=(r.qr/max*100).toFixed(1);
+    return `<div class="abar">
+      <div class="bl" title="${r.label}">${r.label}</div>
+      <div class="atrack">
+        <div class="araw" style="width:${rawW}%;background:${c}"></div>
+        <div class="aqual" style="width:${qW}%;background:${c}"
+             data-tip="<b>${r.label}</b><br>surovo: ${N(r.reach)}<br>utež ×${nf2.format(r.coef)}<br>kakovostno: ${N(r.qr)}"></div>
+      </div>
+      <div class="bv">${N(r.qr)}<small>×${nf2.format(r.coef)}</small></div>
+    </div>`;
+  }).join('');
+  attachTips(host);
+}
+function rItem(n,t){return `<div class="ritem"><div class="rn">${n}</div><div class="rt">${t}</div></div>`;}
 function tvLang(d){
   const rows=[
-    ['GRP-ekvivalent (na epizodo)', nf1.format(d.grpTotal)+' GRP', 'doseg ÷ ciljna skupina × 100'],
+    ['Kakovostni (pozornostni) doseg', N(d.qreach), 'doseg × utež · ø ×'+nf2.format(d.util)],
+    ['GRP-ekvivalent (na epizodo)', nf1.format(d.grpTotal)+' GRP', (d.attn?'kakovostni':'surovi')+' doseg ÷ ciljna skupina × 100'],
     ['Strošek enakega dosega na TV', EUR(d.tvMatch), 'GRP × CPP ('+EUR(d.cpp)+')'],
     ['≈ Ekvivalent 30-sek. spotov', nf1.format(d.spots)+'×', 'pri referenčni ceni spota '+EUR(S.spot)],
     ['CPT — TV', EUR2(d.cpt), 'strošek 1000 kontaktov na TV'],
-    ['CPM — podcast (efektivni)', EUR2(d.effCPM), 'bruto vrednost ÷ doseg × 1000'],
+    ['CPM — podcast (efektivni)', EUR2(d.effCPM), (d.attn?'na 1000 pozornostnih':'na 1000 surovih')+' stikov'],
     ['Unikatni doseg (netiran)', N(d.netReach), 'po faktorju prekrivanja ×'+nf2.format(S.dedup)],
   ];
   return `<table class="data" style="font-size:13px"><tbody>${
@@ -842,6 +923,10 @@ document.querySelectorAll('#uni_seg button').forEach(b=>{
   });
 });
 
+document.getElementById('attn').addEventListener('change',e=>{
+  S.attnOn=e.target.checked; renderExceptTableInputs();
+});
+
 document.getElementById('preset').addEventListener('change',e=>{
   S.preset=e.target.value;
   S.platforms=clone(PRESETS[S.preset].platforms);
@@ -850,7 +935,9 @@ document.getElementById('preset').addEventListener('change',e=>{
 
 document.getElementById('reset').addEventListener('click',()=>{
   Object.assign(S,clone(DEFAULTS));
+  S.platforms.forEach(p=>{p.coef=COEF[p.key];});   // ponastavi uteži, doseg/CPM ostanejo
   ['universe','cpp','spot','integ','dedup'].forEach(k=>{document.getElementById(k).value=S[k];});
+  document.getElementById('attn').checked=S.attnOn;
   document.querySelectorAll('#uni_seg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.uni==='900000'?'true':'false'));
   syncCtlLabels(); render();
 });

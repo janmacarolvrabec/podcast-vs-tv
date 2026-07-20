@@ -23,17 +23,25 @@ Odpri `index.html` v brskalniku. Ni odvisnosti, ni build koraka — vse (podatki
 ## Model na kratko
 
 1. **Doseg → medijska vrednost (CPM).** Vsakemu omrežju/formatu pripišemo tržni CPM; `vrednost = doseg × CPM ÷ 1000`.
-2. **Doseg → GRP-ekvivalent.** `GRP = doseg ÷ ciljna skupina × 100`. Ker se SI TV prodaja prek GRP, s tem postavimo podcast na isto os.
-3. **Primerjava na tisoč kontaktov.** `CPT_TV = CPP × 100.000 ÷ ciljna skupina`; efektivni podcast CPM primerjamo s TV CPT.
-4. **Kakovostne prilagoditve.** Pribitek za host-read integracijo, netiranje prekrivanja omrežij → priporočeni razpon cene.
+2. **Pozornostno uteževanje.** Vsak stik pomnožimo s **pozornostnim koeficientom** platforme (YouTube longplay = 1,00 = TV-referenca, drsni formati manj) → `kakovostni doseg = doseg × utež`. Podlaga: Nielsen The Gauge (YouTube #1 v TV gledanosti) in meritve pozornosti (Amplified Intelligence / Adelaide / Dentsu).
+3. **Doseg → GRP-ekvivalent.** `GRP = kakovostni doseg ÷ ciljna skupina × 100`. Ker se SI TV prodaja prek GRP, s tem postavimo podcast na isto os. (Pozornostni model se da izklopiti → računa iz surovega dosega.)
+4. **Primerjava na tisoč kontaktov.** `CPT_TV = CPP × 100.000 ÷ ciljna skupina`; efektivni podcast CPM primerjamo s TV CPT.
+5. **Kakovostne prilagoditve.** Pribitek za host-read integracijo, netiranje prekrivanja omrežij → priporočeni razpon cene.
+
+### Zakaj ne vrednotimo vseh platform enako
+
+En ogled cele epizode na YouTubu (ki v tujini nadomešča linearno TV v dnevni sobi) ni enakovreden bežnemu prehodu Reels med drsanjem. Zato platforme utežimo po pozornosti — YouTube in audio nosita TV-primerljivo težo, drsni formati manj. To iz "surovega večkrat ceneje" naredi pošteno primerjavo, ki je tipično blizu **TV parnosti** — verodostojnejši prodajni argument.
 
 Vse predpostavke (ciljna skupina, CPP, CPM po omrežjih, pribitki) so uredljive v vmesniku; grafi in KPI se preračunajo v živo.
 
 ## Vzorčni rezultat (Macarol Show, privzete predpostavke)
 
-- Doseg ≈ **554.616 stikov / epizodo** (seštevek platform, T+30)
+- Doseg ≈ **554.616 stikov / epizodo** (surovi seštevek platform, T+30)
+- Kakovostni (pozornostni) doseg ≈ **208.867** (ø utež ×0,38)
 - Bruto medijska vrednost ≈ **€3.235 / epizodo**
-- TV-ekvivalent ≈ **61,6 GRP** = **€7.395**, če bi doseg kupil na TV
+- TV-ekvivalent (pozornostni) ≈ **23,2 GRP** = **€2.785** na TV → ≈ **parnost** s TV na tisoč pozornostnih stikov
 - Priporočeni razpon cene ≈ **€2.900–4.700 / epizodo** (trenutna dogovorjena cena: €1.500–3.500)
+
+*(Ob izklopljenem pozornostnem modelu: 61,6 GRP = €7.395 in podcast 2,3× ceneje na surovi doseg.)*
 
 > Model ni uradni cenik nobene medijske hiše. Privzeti CPM in CPP so tržne ocene za sidranje pogovora; realne cene se dogovarjajo.
