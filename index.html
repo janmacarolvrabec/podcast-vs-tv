@@ -3,7 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vrednost oglaševanja na podcastu — primerjava s TV</title>
+<title>Podcast × TV valuator — koliko je vredno oglaševanje na podcastu? | Macarol Show</title>
+<meta name="description" content="Interaktivno orodje za medijsko planiranje: oceni vrednost oglaševanja na podcastu in ga primerjaj s TV (GRP, CPP, CPM, pozornost, kredibilnost). Vpiši svoje dosege in CPM ter dobi vrednotenje. Podprto z raziskavami (Nielsen, Amplified Intelligence, Harris Poll).">
+<meta name="keywords" content="oglaševanje na podcastu, vrednost podcasta, podcast vs TV, sponzorstvo podcasta, GRP, CPP, CPM, medijsko planiranje, host-read, influencer marketing, Macarol Show, City Magazine, Slovenija">
+<meta name="author" content="Jan Macarol · Macarol Show · City Magazine">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#e34948">
+<link rel="canonical" href="https://janmacarolvrabec.github.io/podcast-vs-tv/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Podcast × TV valuator">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:url" content="https://janmacarolvrabec.github.io/podcast-vs-tv/">
+<meta property="og:title" content="Kaj dobiš, če oglašuješ na podcastu?! — Podcast × TV valuator">
+<meta property="og:description" content="Vrednost pojavnosti na podcastu, prevedena v TV valuto: GRP, pozornost in oglasni učinek. Ena epizoda doseže ~26 % Slovenije; YouTube pozornost ≈ TV; host-read +67 % nakupne namere.">
+<meta property="og:image" content="https://janmacarolvrabec.github.io/podcast-vs-tv/assets/og-cover.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="Kaj dobiš, če oglašuješ na podcastu?! — Podcast × TV valuator">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kaj dobiš, če oglašuješ na podcastu?!">
+<meta name="twitter:description" content="Vrednost pojavnosti na podcastu, prevedena v TV valuto — GRP, pozornost in oglasni učinek. Vpiši svoje dosege in dobi vrednotenje.">
+<meta name="twitter:image" content="https://janmacarolvrabec.github.io/podcast-vs-tv/assets/og-cover.png">
 <style>
 :root{
   color-scheme: light;
@@ -293,6 +317,24 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .credresult .cr-lbl b{color:var(--ink)}
 .credresult.off{background:var(--surface-3);border-color:var(--line)}
 .credresult.off .cr-big{color:var(--ink-3);font-size:16px}
+
+/* methodologies + bibliography */
+.metlist{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:760px){.metlist{grid-template-columns:1fr}}
+.metcard{background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:14px 15px}
+.metcard .mnum{font-size:11px;font-weight:700;color:var(--tv);letter-spacing:.08em}
+.metcard h5{font-size:13.5px;margin:6px 0 6px;letter-spacing:-.01em}
+.metcard p{font-size:12px;color:var(--ink-3);margin:0;line-height:1.5}
+.metcard code{font-family:var(--mono);font-size:11px;background:var(--surface-3);padding:1px 5px;border-radius:5px;color:var(--ink)}
+.biblio{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px}
+@media(max-width:760px){.biblio{grid-template-columns:1fr}}
+.bgroup h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:6px 0 6px;font-weight:700}
+.bitem{padding:9px 0;border-bottom:1px solid var(--line)}
+.bgroup .bitem:last-child{border-bottom:0}
+.bitem .bf{font-size:13px;color:var(--ink);line-height:1.45}
+.bitem .bf b{color:var(--pod)}
+.bitem .bs{font-size:11.5px;color:var(--ink-3);margin-top:3px}
+.bitem .bs a{color:var(--tv);font-weight:600}
 
 /* note bar + clear button */
 .notebar{display:flex;gap:12px;align-items:flex-start;background:var(--tv-soft);border:1px solid color-mix(in srgb,var(--tv) 22%,transparent);
@@ -724,7 +766,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
   </section>
 
   <!-- METHODOLOGY -->
-  <section class="block">
+  <section class="block" id="metodologija-prose">
     <div class="block-h"><div><h2>Metodologija &amp; viri</h2></div></div>
     <div class="panel"><div class="body">
       <div class="method">
@@ -761,6 +803,73 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
         AGB Nielsen SI · Interni benchmark vprašalnik Macarol Show (2026).
       </div>
       <div class="disclaimer" id="disclaimer"></div>
+    </div></div>
+  </section>
+
+  <!-- RESEARCH & METHODOLOGIES -->
+  <section class="block" id="raziskave">
+    <div class="block-h">
+      <div>
+        <h2>Raziskave &amp; popis metodologij</h2>
+        <p>Vsaka številka v modelu ima podlago. Spodaj so metodologije, ki jih model uporablja, in raziskave, na katerih temeljijo — z neposrednimi viri.</p>
+      </div>
+    </div>
+    <div class="panel"><div class="body">
+
+      <h3 style="font-size:14px;margin-bottom:14px">Metodologije v modelu</h3>
+      <div class="metlist">
+        <div class="metcard"><div class="mnum">01</div><h5>TV valuta — GRP &amp; CPP</h5>
+          <p>TV se prodaja prek GRP (1 GRP = 1 % ciljne skupine). <code>strošek = GRP × CPP</code>, <code>GRP = doseg ÷ skupina × 100</code>.</p></div>
+        <div class="metcard"><div class="mnum">02</div><h5>Medijska vrednost — CPM</h5>
+          <p>Tržna cena na 1000 impresij po formatu. <code>vrednost = doseg × CPM ÷ 1000</code>.</p></div>
+        <div class="metcard"><div class="mnum">03</div><h5>Pozornostno uteževanje</h5>
+          <p>Vsak stik × pozornostni koeficient. <code>kakov. doseg = Σ(doseg × utež)</code>; YouTube longplay = 1,00 = TV.</p></div>
+        <div class="metcard"><div class="mnum">04</div><h5>Kredibilnostni učinek</h5>
+          <p>Creator/host-read stik nosi večji oglasni učinek. <code>TV strošek za enak učinek = GRP × CPP × mult.</code></p></div>
+        <div class="metcard"><div class="mnum">05</div><h5>Relevanca vs Slovenija</h5>
+          <p>Doseg in skupnost kot delež populacije. <code>delež = doseg ÷ populacija SI</code>.</p></div>
+        <div class="metcard"><div class="mnum">06</div><h5>Netiranje &amp; priporočena cena</h5>
+          <p>Unikatni doseg = doseg × dedup; cena = medijska vrednost × host-read pribitek, kot razpon.</p></div>
+      </div>
+
+      <h3 style="font-size:14px;margin:8px 0 14px">Raziskave &amp; viri</h3>
+      <div class="biblio">
+        <div class="bgroup">
+          <h4>TV valuta &amp; prodaja (SI)</h4>
+          <div class="bitem"><div class="bf">Ceniki in način prodaje TV oglaševanja v Sloveniji (GRP, CPP, faktorji dolžine).</div>
+            <div class="bs"><a href="https://omisli.si/oglasevanje-marketing/tv-oglasevanje/cene/" target="_blank" rel="noopener">Omisli.si — TV oglaševanje cena 2026</a> · <a href="https://www.24ur.com/s/Cf3gbX" target="_blank" rel="noopener">Pro Plus / POP TV — Pogoji prodaje 2026</a></div></div>
+          <div class="bitem"><div class="bf">Valute merjenja gledanosti in zakupa TV; prodajni pogoji javne TV.</div>
+            <div class="bs"><a href="https://castoola.com/sl/valute-merjenja-gledanosti-in-zakupa-tv/" target="_blank" rel="noopener">Castoola</a> · <a href="https://www.rtvslo.si/files/marketing/prodajni_pogoji_2017_javna_objava-__istopis.pdf" target="_blank" rel="noopener">RTV SLO — prodajni pogoji</a></div></div>
+          <div class="bitem"><div class="bf">Merjenje gledanosti TV v Sloveniji (panel).</div>
+            <div class="bs">AGB Nielsen Slovenija</div></div>
+        </div>
+
+        <div class="bgroup">
+          <h4>YouTube ≈ TV &amp; pozornost</h4>
+          <div class="bitem"><div class="bf"><b>YouTube je #1 v TV gledanosti</b> (~12–13 % časa), pred Netflixom; gledanost na TV zaslonu <b>+53 %</b> v 2 letih.</div>
+            <div class="bs"><a href="https://www.nielsen.com/news-center/2025/youtube-maintains-largest-share-of-tv-viewing-among-media-companies-for-third-consecutive-month/" target="_blank" rel="noopener">Nielsen — The Gauge, 2025</a></div></div>
+          <div class="bitem"><div class="bf">Meritve pozornosti po platformah: YouTube/CTV/audio ≈ TV; za enako pozornost <b>~2×</b> vložka na TikToku/Reels/displayu.</div>
+            <div class="bs"><a href="https://www.westwoodone.com/blog/2024/08/12/adelaide-attentiveness-measurement-1000-of-am-fm-radio-ads-require-2635-worth-of-facebook-ads-to-achieve-the-same-level-of-attention-audio-platforms-generate-nearly-the-same-attentiveness-as-tv/" target="_blank" rel="noopener">Amplified Intelligence / Adelaide / Dentsu</a></div></div>
+        </div>
+
+        <div class="bgroup">
+          <h4>Kredibilnost &amp; učinek (creator)</h4>
+          <div class="bitem"><div class="bf"><b>+67 %</b> višja nakupna namera po host-read priporočilu; talent-read dvigne intent.</div>
+            <div class="bs"><a href="https://theharrispoll.com/articles/podcast-advertising-research/" target="_blank" rel="noopener">The Harris Poll / Audacy, 2025</a></div></div>
+          <div class="bitem"><div class="bf">Priklic podcast oglasa <b>80 %</b> proti 45 % (mobilni) / 35 % (namizni) digital.</div>
+            <div class="bs"><a href="https://www.nielsen.com/insights/2020/host-read-podcast-ads-pack-a-brand-recall-punch/" target="_blank" rel="noopener">Nielsen — Host-Read Recall, 2020</a></div></div>
+          <div class="bitem"><div class="bf">Influencerji gradijo bolj osebne povezave; osebna priporočila najbolj zaupan format; influencer programi <b>presegajo</b> TV oglase.</div>
+            <div class="bs"><a href="https://www.nielsen.com/insights/2022/getting-closer-influencers-help-brands-build-more-personal-consumer-connections/" target="_blank" rel="noopener">Nielsen — Trust in Advertising / Influencers, 2022</a></div></div>
+        </div>
+
+        <div class="bgroup">
+          <h4>Podatki &amp; metodologija modela</h4>
+          <div class="bitem"><div class="bf">Privzeti dosegi: <b>povprečje 5 zaporednih epizod</b> podcasta Macarol Show, merjeno 30 dni po objavi (T+30); seštevek stikov po platformah.</div>
+            <div class="bs">Interni benchmark vprašalnik Macarol Show (2026)</div></div>
+          <div class="bitem"><div class="bf">Polna metodologija, formule, privzeti CPM in koeficienti z obrazložitvijo.</div>
+            <div class="bs"><a href="docs/metodologija.md" target="_blank" rel="noopener">docs/metodologija.md</a> · razdelek <a href="#metodologija-prose">Metodologija &amp; viri</a> zgoraj</div></div>
+        </div>
+      </div>
     </div></div>
   </section>
 
