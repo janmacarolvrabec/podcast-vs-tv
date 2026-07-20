@@ -318,6 +318,20 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .credresult.off{background:var(--surface-3);border-color:var(--line)}
 .credresult.off .cr-big{color:var(--ink-3);font-size:16px}
 
+/* credibility warning (pulsuje dokler ni vklopljeno) */
+.credwarn{display:flex;gap:12px;align-items:center;border-radius:11px;padding:13px 15px;margin-bottom:18px;font-size:13px;line-height:1.45;
+  background:color-mix(in srgb,var(--warn) 14%,transparent);border:1px solid color-mix(in srgb,var(--warn) 42%,transparent);color:var(--ink)}
+.credwarn .cw-ico{flex:none;width:26px;height:26px;border-radius:50%;background:var(--warn);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.credwarn b{color:var(--warn)}
+.credwarn.done{background:color-mix(in srgb,var(--good) 12%,transparent);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+.credwarn.done .cw-ico{background:var(--good)}
+.credwarn.done b{color:var(--good)}
+@keyframes warnpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--warn) 42%,transparent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.credwarn.pulse{animation:warnpulse 2.4s infinite}
+@keyframes togglepulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--warn) 55%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+#cred.wpulse{animation:togglepulse 2.4s infinite}
+@media(prefers-reduced-motion:reduce){.credwarn.pulse,#cred.wpulse{animation:none}}
+
 /* methodologies + bibliography */
 .metlist{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
 @media(max-width:760px){.metlist{grid-template-columns:1fr}}
@@ -365,6 +379,30 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .contactline{margin-top:14px;font-size:13px;color:var(--ink-2)}
 .contactline a{font-weight:640}
 
+/* use counter badge */
+.usebadge{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:13px;color:var(--ink-2);
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 15px;box-shadow:var(--shadow)}
+.usebadge b{color:var(--ink);font-weight:750;font-variant-numeric:tabular-nums}
+.usebadge .mic-dot{width:8px;height:8px;border-radius:50%;background:var(--good);flex:none;animation:pulse 2.4s infinite}
+
+/* legal modal */
+.modal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(10,15,22,.55);backdrop-filter:blur(3px)}
+.modal[hidden]{display:none}
+.modal-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;max-width:640px;width:100%;
+  max-height:86vh;overflow-y:auto;padding:26px 28px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative}
+.modal-card h3{font-size:17px;margin:22px 0 8px}
+.modal-card h3:first-of-type{margin-top:0}
+.modal-card p{font-size:13.5px;color:var(--ink-2);line-height:1.55;margin:0 0 10px}
+.modal-card ul{margin:0 0 10px;padding-left:18px}
+.modal-card li{font-size:13.5px;color:var(--ink-2);line-height:1.55;margin-bottom:6px}
+.modal-card code{font-family:var(--mono);font-size:12px;background:var(--surface-3);padding:1px 5px;border-radius:5px;color:var(--ink)}
+.modal-card a{font-weight:600}
+.modal-x{position:absolute;top:14px;right:16px;border:0;background:var(--surface-2);color:var(--ink-2);
+  width:32px;height:32px;border-radius:9px;font-size:20px;line-height:1;cursor:pointer}
+.modal-x:hover{color:var(--pod);border:1px solid var(--line-strong)}
+footer a{cursor:pointer}
+
 /* tooltip */
 #tt{position:fixed;z-index:80;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;
   padding:7px 10px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;transition:opacity .12s;max-width:240px;line-height:1.45}
@@ -396,6 +434,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
     <div class="eyebrow">Raziskava &amp; model vrednotenja · slovenski trg</div>
     <h1>Koliko je vredna pojavnost na <span class="hl">podcastu</span>,<br>če jo merimo v <span class="hl2">TV valuti</span>?</h1>
     <p class="lead">Dashboard prevede doseg podcasta po posameznih omrežjih v tržno medijsko vrednost (CPM) in ga postavi ob bok načinu, kako se v Sloveniji prodaja TV oglaševanje — prek GRP točk in cene na tisoč kontaktov. Vse predpostavke so uredljive; privzeto so napolnjene z realnimi podatki podcasta <b>Macarol Show</b>.</p>
+    <div class="usebadge"><span class="mic-dot"></span><b id="usecount">200</b>&nbsp;podcastov je bilo že ovrednotenih s tem kalkulatorjem</div>
   </div>
 
   <div class="kpis" id="kpis"></div>
@@ -442,7 +481,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
         <div class="ctl-grp-title">Pozornostni model</div>
         <div class="ctl">
           <label class="switchrow" for="attn">TV-primerjava po pozornosti <input type="checkbox" id="attn" checked></label>
-          <div class="hint">Vklopljeno: GRP in strošek na TV se računata iz <b>pozornostno ponderiranega</b> dosega — vsak stik pomnožen z utežjo platforme (stolpec <b>Utež</b> v tabeli). YouTube longplay = 1,00 (TV-referenca), drsni formati manj. Izklopljeno: iz surovega dosega.</div>
+          <div class="hint">Vklopljeno: GRP in strošek na TV se računata iz <b>pozornostno ponderiranega</b> dosega — vsak stik pomnožen z utežjo platforme (stolpec <b>Utež</b> v tabeli). YouTube longplay = 1,00 (TV-referenca), <b>audio (podcast) celo nad njo (1,10)</b> zaradi namenskega poslušanja, drsni formati manj. Izklopljeno: iz surovega dosega.</div>
         </div>
 
         <button class="resetbtn" id="reset">↺ Ponastavi predpostavke</button>
@@ -519,7 +558,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
     <div class="block-h">
       <div>
         <h2>Pozornost, ne le doseg — zato je YouTube ≈ TV</h2>
-        <p>En ogled cele epizode na YouTubu (ki v tujini nadomešča linearno TV v dnevni sobi) ni enakovreden enemu prehodu Reels med drsanjem. Zato vsak stik tehtamo s <b>pozornostnim koeficientom</b>: koliko TV-vrednega stika dejansko prinese. Poln blok = kakovostni (pozornostni) doseg, bledi rep = pozornost, ki se izgubi.</p>
+        <p>En ogled cele epizode na YouTubu (ki v tujini nadomešča linearno TV v dnevni sobi) ni enakovreden enemu prehodu Reels med drsanjem. <b>Audio poslušanje (Spotify, Apple) je celo najbolj pozorno</b> — je namensko in redko pasivno, zato dobi utež nad YouTubom. Zato vsak stik tehtamo s <b>pozornostnim koeficientom</b>: koliko TV-vrednega stika dejansko prinese. Poln blok = kakovostni (pozornostni) doseg, bledi rep = pozornost, ki se izgubi.</p>
       </div>
     </div>
     <div class="chart-grid">
@@ -578,6 +617,7 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
       </div>
     </div>
     <div class="panel"><div class="body">
+      <div class="credwarn pulse" id="credwarn"></div>
       <div class="credmod">
         <div class="credpanel">
           <div class="credhead">
@@ -902,9 +942,32 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
   </section>
 
   <footer>
-    <span>Podcast × TV valuator · osnovno orodje za medijsko planiranje · Macarol Show / City Magazine.</span>
+    <span>Podcast × TV valuator · osnovno orodje za medijsko planiranje · Macarol Show / City Magazine.<br>
+      🔒 Ta stran <b>ne uporablja piškotkov</b> in <b>ne beleži</b> uporabe kalkulatorja. ·
+      <a id="openTerms">Pogoji uporabe</a> · <a id="openPrivacy">Zasebnost</a></span>
     <span class="muted">Vsi zneski v € · na epizodo, če ni navedeno drugače.</span>
   </footer>
+</div>
+
+<!-- Legal modal -->
+<div class="modal" id="legal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+    <button class="modal-x" id="legalX" aria-label="Zapri">×</button>
+    <h3 id="legalTitle">Pogoji uporabe</h3>
+    <ul>
+      <li><b>Podcast × TV valuator</b> je informativno orodje za medijsko planiranje. Prikazane ocene so okvirne in <b>ne predstavljajo uradnega cenika</b> ali zavezujoče ponudbe.</li>
+      <li>Privzete cene (CPM) in paketi temeljijo na trenutnem ceniku podcasta <b>Macarol Show</b>; vsak avtor podcasta lahko svoje cene postavi drugače.</li>
+      <li>Avtor ne jamči za točnost ali primernost za konkreten namen in ne odgovarja za odločitve, sprejete na podlagi orodja.</li>
+      <li>Imena medijev, platform in blagovne znamke tretjih oseb so last njihovih lastnikov ter navedena zgolj v informativne/primerjalne namene.</li>
+    </ul>
+    <h3>Zasebnost</h3>
+    <ul>
+      <li>Stran <b>ne uporablja piškotkov</b> in ne vključuje analitike ali sledilnikov tretjih oseb.</li>
+      <li>Uporaba kalkulatorja se <b>ne beleži</b>; vneseni podatki (dosegi, CPM) ostanejo v tvojem brskalniku in se <b>ne pošiljajo na strežnik</b>.</li>
+      <li>Edini lokalni zapis je preprost števec obiskov (<code>localStorage</code>), shranjen izključno na tvoji napravi in nikamor poslan; izbrišeš ga z brisanjem podatkov brskalnika.</li>
+      <li>Vprašanja: <a href="mailto:janja.prijatelj@citymagazine.si">janja.prijatelj@citymagazine.si</a>.</li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -916,10 +979,11 @@ const FAMILIES = {
 };
 /* pozornostni koeficient (utež): YouTube longplay = 1,00 = TV-referenca.
    Podlaga: Nielsen The Gauge (YouTube #1 v TV gledanosti), meritve pozornosti
-   Amplified Intelligence / Adelaide / Dentsu (audio ≈ TV; drsni formati ~0,5× pozornosti). */
+   Amplified Intelligence / Adelaide / Dentsu (audio ≈ TV ali višje; drsni formati ~0,5× pozornosti).
+   Audio (Spotify/Apple) = 1,10: namensko poslušanje, visok priklic (host-read 80 %), malo pasivnega drsanja. */
 const COEF = {
   yt_long:1.00, yt_short:0.35, fb_long:0.55, fb_reels:0.28, ig_reels:0.32, ig_story:0.22,
-  tiktok:0.35, linkedin:0.50, x:0.18, spotify:0.85, apple:0.85, audio_other:0.80
+  tiktok:0.35, linkedin:0.50, x:0.18, spotify:1.10, apple:1.10, audio_other:1.00
 };
 const BASE = [
   {key:'yt_long',  label:'YouTube — longplay',   fam:'YouTube',   reach:30600, cpm:12},
@@ -1069,6 +1133,7 @@ function renderExceptTableInputs(){
     rItem('12–13 %','<b>YouTube je #1 v TV gledanosti</b> med vsemi mediji (ZDA) — več časa gledanja kot Netflix ali katerakoli druga storitev.<span class="rsrc">Nielsen — The Gauge, 2025</span>'),
     rItem('+53 %','rast gledanosti <b>YouTuba na TV zaslonu</b> v dveh letih; dnevna soba je najhitreje rastoč zaslon.<span class="rsrc">Nielsen — The Gauge, 2025</span>'),
     rItem('~2×','večji vložek je na <b>TikToku, Reels in displayu</b> potreben za enako pozornost kot na YouTubu, CTV ali audiu.<span class="rsrc">Amplified Intelligence / Adelaide / Dentsu</span>'),
+    rItem('≥ TV','<b>audio (podcast) pozornost je na ravni TV ali višja</b> — poslušanje je namensko (2/3 doma), z visokim priklicem in malo pasivnega drsanja.<span class="rsrc">Amplified Intelligence · Edison Research · EEG študije</span>'),
   ].join('');
 
   /* sticky primerjava s TV */
@@ -1082,14 +1147,22 @@ function renderExceptTableInputs(){
     rtile(nf1.format(d.folPct*100)+' %', 'Slovenije je v <b>skupnosti</b> osebne blagovne znamke ('+N(d.fol)+' sledilcev)', Math.min(1,d.folPct)),
   ].join('');
 
-  /* kredibilnostni modul */
+  /* kredibilnostni modul + opozorilo */
   const cr=document.getElementById('credresult');
+  const cw=document.getElementById('credwarn');
+  const sw=document.getElementById('cred');
   if(d.effMult>1){
     cr.className='credresult';
     cr.innerHTML=`<div class="cr-big">${EUR(d.effectTvMatch)}</div><div class="cr-lbl">bi na TV stalo doseganje <b>enakega oglasnega učinka</b> kot ena epizoda — <b>${EUR(d.effectDelta)} več</b> od gole primerjave dosega (učinek ×${nf2.format(d.effMult)}).</div>`;
+    cw.className='credwarn done';
+    cw.innerHTML=`<span class="cw-ico">✓</span><div><b>Strokovna korekcija je vključena.</b> Vrednost je zdaj izražena po dejanskem oglasnem učinku creatorja (×${nf2.format(d.effMult)}).</div>`;
+    if(sw) sw.classList.remove('wpulse');
   } else {
     cr.className='credresult off';
     cr.innerHTML=`<div class="cr-big">Korekcija izklopljena</div><div class="cr-lbl">Vklopi, da vrednost izraziš po dejanskem <b>oglasnem učinku</b> (host-read / creator), ne le po dosegu.</div>`;
+    cw.className='credwarn pulse';
+    cw.innerHTML=`<span class="cw-ico">!</span><div><b>Opozorilo:</b> prikazana vrednost je <b>konservativna in podcenjena</b> — ne vključuje kredibilnostnega učinka osebne blagovne znamke. Za <b>pravo vrednost</b> vklopi strokovno korekcijo spodaj.</div>`;
+    if(sw) sw.classList.add('wpulse');
   }
   document.getElementById('credresearch').innerHTML = [
     rItem('+67 %','višja nakupna namera po priporočilu voditelja (host-read) v primerjavi z oglasom brez njega.<span class="rsrc">Audacy / The Harris Poll, 2025</span>'),
@@ -1301,6 +1374,29 @@ document.getElementById('theme').addEventListener('click',()=>{
   document.documentElement.setAttribute('data-theme', dark?'light':'dark');
   render();
 });
+
+/* ---------- števec uporabnikov (lokalno, brez sledenja) ---------- */
+(function(){
+  try{
+    var KEY='pvt_uses', SES='pvt_counted';
+    var n=parseInt(localStorage.getItem(KEY)||'200',10);
+    if(isNaN(n)||n<200) n=200;
+    if(!sessionStorage.getItem(SES)){ n+=1; localStorage.setItem(KEY,String(n)); sessionStorage.setItem(SES,'1'); }
+    var el=document.getElementById('usecount'); if(el) el.textContent=nf0.format(n);
+  }catch(e){ /* zasebni način brez localStorage — pusti privzeto 200 */ }
+})();
+
+/* ---------- pravni modal ---------- */
+(function(){
+  var m=document.getElementById('legal');
+  var open=function(){ m.hidden=false; };
+  var close=function(){ m.hidden=true; };
+  document.getElementById('openTerms').addEventListener('click',open);
+  document.getElementById('openPrivacy').addEventListener('click',open);
+  document.getElementById('legalX').addEventListener('click',close);
+  m.addEventListener('click',function(e){ if(e.target===m) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
 
 /* ---------- init ---------- */
 syncCtlLabels();

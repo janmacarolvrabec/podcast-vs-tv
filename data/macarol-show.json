@@ -41,19 +41,19 @@
     "skupaj_5_epizod": 2773080
   },
   "pozornostni_koeficient": {
-    "opis": "Utež TV-primerljivosti stika (YouTube longplay = 1,00 = TV-referenca). Podlaga: Nielsen The Gauge (YouTube #1 v TV gledanosti); meritve pozornosti Amplified Intelligence / Adelaide / Dentsu (audio ≈ TV; drsni formati ~0,5× pozornosti). Vrednosti so uredljive v dashboardu.",
+    "opis": "Utež TV-primerljivosti stika (YouTube longplay = 1,00 = TV-referenca; audio celo nad njo zaradi namenskega poslušanja). Podlaga: Nielsen The Gauge (YouTube #1 v TV gledanosti); meritve pozornosti Amplified Intelligence / Adelaide / Dentsu (audio ≈ TV ali višje); Edison Research (namensko poslušanje); EEG študije (visok priklic audia). Vrednosti so uredljive v dashboardu.",
+    "spotify": 1.10,
+    "apple": 1.10,
+    "audio_other": 1.00,
     "yt_long": 1.00,
-    "yt_short": 0.35,
     "fb_long": 0.55,
-    "fb_reels": 0.28,
-    "ig_reels": 0.32,
-    "ig_story": 0.22,
-    "tiktok": 0.35,
     "linkedin": 0.50,
-    "x": 0.18,
-    "spotify": 0.85,
-    "apple": 0.85,
-    "audio_other": 0.80
+    "yt_short": 0.35,
+    "tiktok": 0.35,
+    "ig_reels": 0.32,
+    "fb_reels": 0.28,
+    "ig_story": 0.22,
+    "x": 0.18
   },
   "komercialno": {
     "aktivni_sponzorji_12m": "1 sponzor / 3 mesece",

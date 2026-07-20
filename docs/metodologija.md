@@ -54,14 +54,15 @@ Doseg ni enakovreden. En ogled cele epizode na **YouTubu** (lean-back, velik zas
 
 - Po Nielsenovem **The Gauge (2025)** je YouTube **#1 v TV gledanosti** med vsemi mediji (~12–13 % vsega časa gledanja TV), pred Netflixom; gledanost na TV zaslonu je v dveh letih zrasla za **53 %**.
 - Meritve pozornosti (**Amplified Intelligence / Adelaide / Dentsu**) kažejo, da YouTube, CTV in **audio** dosegajo TV-primerljivo pozornost, medtem ko drsni formati (TikTok, Reels, display) za enako pozornost zahtevajo **~2× večji** vložek.
+- **Audio (Spotify / Apple) dobi utež nad YouTubom (1,10):** podcast poslušanje je namensko (Edison Research: dve tretjini poslušajo doma), z visokim priklicem (host-read 80 %) in malo pasivnega drsanja; EEG študije kažejo močno pozornost in pomnjenje pri audiu. Zvočni stik zato praviloma nosi več fokusa kot povprečen video ogled.
 
 ### Privzeti koeficienti (uredljivo)
 
 | Format | Utež | Zakaj |
 |---|---|---|
+| Spotify / Apple (audio) | 1,10 | **najbolj pozorno**: namensko poslušanje, malo pasivnega drsanja, visok priklic (host-read 80 %) |
+| Drugi audio | 1,00 | namensko poslušanje |
 | YouTube longplay | 1,00 | TV-referenca: velik zaslon, dolg dwell, lean-back |
-| Spotify / Apple (audio) | 0,85 | pozornost blizu TV; dolgo, a lahko v ozadju |
-| Drugi audio | 0,80 | |
 | Facebook longplay | 0,55 | daljši video, a pogosto nemi autoplay v feedu |
 | LinkedIn | 0,50 | profesionalni kontekst, a feed |
 | YouTube Shorts / TikTok | 0,35 | visok completion, a kratek, mobilni scroll |
