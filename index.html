@@ -217,6 +217,25 @@ table.data tr.total td:first-child{color:var(--ink)}
 .disclaimer{margin-top:18px;padding:14px 16px;border:1px dashed var(--line-strong);border-radius:11px;background:var(--surface-2);font-size:12.5px;color:var(--ink-2)}
 footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
+/* glossary */
+.gloss-intro{display:flex;flex-wrap:wrap;gap:16px;margin:-2px 0 16px;font-size:12.5px;color:var(--ink-2)}
+.gloss-intro span{display:inline-flex;align-items:center;gap:7px}
+.gloss-intro i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.glossary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:880px){.glossary{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.glossary{grid-template-columns:1fr}}
+.gcard{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent,var(--tv));border-radius:12px;padding:15px 16px;box-shadow:var(--shadow)}
+.gcard.tv{--accent:var(--tv)} .gcard.pod{--accent:var(--pod)} .gcard.model{--accent:var(--warn)}
+.gtag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-bottom:10px}
+.gtag.tv{color:var(--tv);background:var(--tv-soft)}
+.gtag.pod{color:var(--pod);background:var(--pod-soft)}
+.gtag.model{color:var(--warn);background:color-mix(in srgb,var(--warn) 15%,transparent)}
+.gcard h4{font-size:15px;margin:0 0 7px;letter-spacing:-.01em}
+.gcard .gdef{font-size:13px;color:var(--ink-2);margin:0 0 10px;line-height:1.52}
+.gcard .glay{font-size:12.8px;color:var(--ink);margin:0;line-height:1.52;padding-top:10px;border-top:1px dashed var(--line)}
+.gcard .glay b{color:var(--accent,var(--tv))}
+.gcard .gform{font-family:var(--mono);font-size:11.5px;background:var(--surface-3);color:var(--ink);padding:2px 6px;border-radius:5px;display:inline-block;margin-top:9px}
+
 /* tooltip */
 #tt{position:fixed;z-index:80;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;
   padding:7px 10px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.28);opacity:0;transition:opacity .12s;max-width:240px;line-height:1.45}
@@ -382,6 +401,124 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
         <div class="csub">isti doseg, izražen v enotah, ki jih pozna medijski zakup</div>
         <div id="tvlang" style="margin-top:6px"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="block" id="pojmi">
+    <div class="block-h">
+      <div>
+        <h2>Razlaga po domače — kaj pomeni vsak pojem</h2>
+        <p>Vsi izrazi s tega kalkulatorja, razloženi brez žargona in s primerom iz vsakdana. Barva pove, iz katerega sveta je pojem.</p>
+      </div>
+    </div>
+    <div class="gloss-intro">
+      <span><i style="background:var(--tv)"></i>Svet TV oglaševanja</span>
+      <span><i style="background:var(--pod)"></i>Svet podcasta / digitala</span>
+      <span><i style="background:var(--warn)"></i>Naš model &amp; primerjava</span>
+    </div>
+    <div class="glossary">
+
+      <article class="gcard tv"><div class="gtag tv">TV svet</div>
+        <h4>Ciljna skupina</h4>
+        <p class="gdef">Ni vsa Slovenija — le tisti ljudje, ki jih oglaševalec sploh želi nagovoriti (npr. odrasli 18–54 let).</p>
+        <p class="glay"><b>Po domače:</b> ne šteješ, koliko ljudi na svetu te vidi, ampak koliko od tistih, ki jih izdelek zares zanima.</p>
+      </article>
+
+      <article class="gcard tv"><div class="gtag tv">TV svet</div>
+        <h4>GRP — točke gledanosti</h4>
+        <p class="gdef">Valuta TV oglaševanja. 1 GRP = 1 % ciljne skupine je enkrat videlo oglas. 30 GRP pomeni za en “pogled” doseženih 30 % skupine.</p>
+        <p class="glay"><b>Po domače:</b> ciljna skupina je poln stadion. Vsak odstotek stadiona, ki vidi tvoj oglas, je ena točka. Več točk = več kupljene pozornosti.</p>
+      </article>
+
+      <article class="gcard tv"><div class="gtag tv">TV svet</div>
+        <h4>CPP — cena točke</h4>
+        <p class="gdef">Koliko evrov stane ena GRP točka. To je pravzaprav TV cenik.</p>
+        <p class="glay"><b>Po domače:</b> cena za to, da 1 % ciljne skupine enkrat vidi oglas. Točke pomnožiš s to ceno in dobiš račun.</p>
+      </article>
+
+      <article class="gcard tv"><div class="gtag tv">TV svet</div>
+        <h4>Referenčni 30-sek. spot</h4>
+        <p class="gdef">Cena enega klasičnega TV oglasa (30 sekund) v najbolj gledanem terminu (prime time).</p>
+        <p class="glay"><b>Po domače:</b> samo za občutek velikosti — “ena epizoda dostavi toliko kot X TV spotov”.</p>
+      </article>
+
+      <article class="gcard pod"><div class="gtag pod">Podcast svet</div>
+        <h4>Doseg / stiki</h4>
+        <p class="gdef">Kolikokrat je bila vsebina videna ali poslušana čez vsa omrežja. Pozor: je seštevek, ne število različnih ljudi.</p>
+        <p class="glay"><b>Po domače:</b> če te isti človek vidi na Instagramu in YouTubu, šteje dvakrat. Zato pravimo “stiki”, ne “ljudje”.</p>
+      </article>
+
+      <article class="gcard pod"><div class="gtag pod">Podcast svet</div>
+        <h4>CPM — cena na tisoč</h4>
+        <p class="gdef">“Mille” je latinsko tisoč. Pove, koliko stane, da oglas vidi 1000 ljudi. Osnovni standard v digitalu.</p>
+        <p class="glay"><b>Po domače:</b> če je CPM 6 €, potem 1000 ogledov stane 6 €. Preprosto cena “na tisoč parov oči”.</p>
+      </article>
+
+      <article class="gcard pod"><div class="gtag pod">Podcast svet</div>
+        <h4>T+30</h4>
+        <p class="gdef">Doseg, izmerjen 30 dni po objavi epizode.</p>
+        <p class="glay"><b>Po domače:</b> vsebina ne doseže vseh prvi dan — v mesecu se nabere realna slika. Da vsi merimo enako, merimo po 30 dneh.</p>
+      </article>
+
+      <article class="gcard pod"><div class="gtag pod">Podcast svet</div>
+        <h4>Longplay, Reels, Shorts</h4>
+        <p class="gdef">Longplay = cela epizoda; Reels / Shorts / klipi = kratki izrezki. Vsak format ima svojo ceno (CPM), ker drugače drži pozornost.</p>
+        <p class="glay"><b>Po domače:</b> cela epizoda te drži dolgo (vredna več na ogled), kratek klip prešvigne mimo (cenejši, a jih je ogromno).</p>
+      </article>
+
+      <article class="gcard pod"><div class="gtag pod">Podcast svet</div>
+        <h4>Host-read integracija</h4>
+        <p class="gdef">Ko oglas prebereš ti sam, s svojimi besedami, kot del pogovora — ne posnet TV spot.</p>
+        <p class="glay"><b>Po domače:</b> kot priporočilo prijatelja namesto plakata. Ljudje bolj verjamejo in ne preskočijo — zato je vreden več (od tod “pribitek”).</p>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Medijska vrednost</h4>
+        <p class="gdef">Če bi doseg, ki ga tvoja vsebina ustvari, moral kupiti kot oglase na trgu — koliko bi te to stalo?</p>
+        <p class="glay"><b>Po domače:</b> tvoja epizoda “podari” oglaševalcu toliko prostora; to je cena istega prostora po ceniku.</p>
+        <span class="gform">doseg × CPM ÷ 1000</span>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>CPT — cena na tisoč (TV izraz)</h4>
+        <p class="gdef">Isto kot CPM, le izraz, ki ga uporablja medijski zakup pri TV. Skupni imenovalec za primerjavo obeh medijev.</p>
+        <p class="glay"><b>Po domače:</b> ista stvar kot CPM, samo TV ljudje ji rečejo drugače. Zato lahko podcast in TV postaviš na isto os.</p>
+        <span class="gform">CPP × 100.000 ÷ ciljna skupina</span>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>GRP-ekvivalent</h4>
+        <p class="gdef">Podcast ni na TV, a ga vseeno prevedemo: “če bi ta doseg dosegel na TV, koliko GRP bi to bilo?”</p>
+        <p class="glay"><b>Po domače:</b> prevajalnik iz podcast jezika v TV jezik — da oglaševalcu lahko rečeš “to je kot toliko TV točk”.</p>
+        <span class="gform">doseg ÷ ciljna skupina × 100</span>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Efektivni CPM</h4>
+        <p class="gdef">Tvoja povprečna cena na tisoč čez vse formate skupaj.</p>
+        <p class="glay"><b>Po domače:</b> ko zmešaš drage (audio) in poceni (kratke klipe) formate, koliko v povprečju stane 1000 tvojih stikov.</p>
+        <span class="gform">medijska vrednost ÷ doseg × 1000</span>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Stroškovna učinkovitost (npr. 2,3×)</h4>
+        <p class="gdef">Kolikokrat ceneje je doseči 1000 ljudi na tvojem podcastu kot na linearni TV.</p>
+        <p class="glay"><b>Po domače:</b> za isti denar dosežeš 2,3× več ljudi kot na TV — ali isti doseg dobiš 2,3× ceneje. Tvoj glavni prodajni argument.</p>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Netiranje / unikatni doseg</h4>
+        <p class="gdef">Ker isti ljudje sledijo na več omrežjih, seštevek stikov preceni število različnih ljudi. Netiranje oceni, koliko jih je zares različnih.</p>
+        <p class="glay"><b>Po domače:</b> odštejemo dvojno štete. Faktor 0,8 pomeni: ocenjujemo, da je 80 % stikov različnih ljudi.</p>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Priporočena cena</h4>
+        <p class="gdef">Koliko zaračunati za sponzorstvo epizode: medijska vrednost + pribitek za zaupanje (host-read), izražena kot razpon.</p>
+        <p class="glay"><b>Po domače:</b> poštena izklicna cena — spodnja meja za hiter dogovor, zgornja za pogajanje.</p>
+      </article>
+
     </div>
   </section>
 
