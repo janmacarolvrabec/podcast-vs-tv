@@ -1,0 +1,52 @@
+{
+  "vir": "Vprašalnik – Podcast Benchmark (Jan Macarol, izpolnjeno 12.5.2026); metodologija: Macarol_Show_Podcast_Benchmark_Tabela",
+  "podcast": {
+    "ime": "Macarol Show",
+    "voditelj": "Jan Macarol",
+    "format": "video + audio",
+    "glavna_platforma": "YouTube (+ audio)",
+    "frekvenca": "tedensko",
+    "povprecna_dolzina_min": 130,
+    "stevilo_epizod": 12,
+    "datum_izpolnjevanja": "2026-05-12"
+  },
+  "sledilci_snapshot": {
+    "youtube": 5540,
+    "facebook_stran": 26700,
+    "facebook_skupina": 8800,
+    "instagram": 14150,
+    "tiktok": 2380,
+    "linkedin": 19800,
+    "x": 6380,
+    "spotify": 2500,
+    "apple": 2500,
+    "drugo_ekosistem": 85000,
+    "skupaj": 173750
+  },
+  "doseg_povprecje_epizode_T30": {
+    "opomba": "Povprečje 5 zaporednih epizod (mar–apr 2026), merjeno 30 dni po objavi (T+30). Vrednosti so seštevek stikov, ne unikatni doseg.",
+    "yt_long": 30600,
+    "yt_short": 3800,
+    "fb_long": 85940,
+    "fb_reels": 147000,
+    "ig_reels": 132540,
+    "ig_story": 59000,
+    "tiktok": 24540,
+    "linkedin": 20970,
+    "x": 42680,
+    "spotify": 3586,
+    "apple": 2900,
+    "audio_other": 1060,
+    "skupaj_na_epizodo": 554616,
+    "skupaj_5_epizod": 2773080
+  },
+  "komercialno": {
+    "aktivni_sponzorji_12m": "1 sponzor / 3 mesece",
+    "tipi": "host-read, oglas, glavni, tehnični, barter",
+    "trajanje_paketa": "1 mesec",
+    "cena_glavni_sponzor_na_epizodo_eur": [1500, 3500],
+    "barter": "da, pri letnih sodelovanjih (npr. avtomobili) visoke vrednosti",
+    "uspeh": "Volvo",
+    "frustracija": "dojemanje dodane vrednosti ekosistema objav"
+  }
+}
