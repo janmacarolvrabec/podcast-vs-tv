@@ -317,6 +317,10 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .credresult .cr-lbl b{color:var(--ink)}
 .credresult.off{background:var(--surface-3);border-color:var(--line)}
 .credresult.off .cr-big{color:var(--ink-3);font-size:16px}
+.credresult.tvv{background:var(--tv-soft);border-color:color-mix(in srgb,var(--tv) 22%,transparent)}
+.credresult.tvv .cr-big{color:var(--tv)}
+.credresult.tvv.off{background:var(--surface-3);border-color:var(--line)}
+.credresult.tvv.off .cr-big{color:var(--ink-3)}
 
 /* credibility warning (pulsuje dokler ni vklopljeno) */
 .credwarn{display:flex;gap:12px;align-items:center;border-radius:11px;padding:13px 15px;margin-bottom:18px;font-size:13px;line-height:1.45;
@@ -640,6 +644,37 @@ footer a{cursor:pointer}
     </div></div>
   </section>
 
+  <!-- TV EFFECT DECAY -->
+  <section class="block" id="tvupad">
+    <div class="block-h">
+      <div>
+        <h2>TV nima več enakega učinka — pozornost gledalca se drobi</h2>
+        <p>GRP šteje <b>izpostavljenost, ne pozornosti</b>. Danes je linearna TV padla pod polovico časa gledanja, občinstvo se stara, med oglasi pa večina gleda v telefon. Isti TV GRP zato dostavi <b>manj resnične pozornosti</b> kot pred leti. To je <b>opcijska strokovna korekcija</b> — vklopi jo, če želiš TV primerjati po dejansko dostavljeni pozornosti, ne le po nominalnem GRP.</p>
+      </div>
+    </div>
+    <div class="panel"><div class="body">
+      <div class="credmod">
+        <div class="credpanel">
+          <div class="credhead">
+            <h3>Korekcija TV pozornosti</h3>
+            <label class="switchrow" for="tvdecay" style="margin:0">Vklopi <input type="checkbox" id="tvdecay"></label>
+          </div>
+          <div class="ctl" style="margin-top:14px;margin-bottom:0">
+            <label for="tvattn">Pozornost, ki jo TV GRP še dostavi <span class="v" id="tvattn_v"></span></label>
+            <input type="range" id="tvattn" min="0.4" max="1" step="0.05" value="0.65">
+            <div class="hint">Delež nominalne TV pozornosti, ki danes dejansko doseže gledalca (ostalo požre drugi zaslon, preskakovanje, upad linearnega občinstva). Privzeto 65 % — konservativno glede na raziskave.</div>
+          </div>
+          <div class="credresult tvv" id="tvresult"></div>
+        </div>
+        <div>
+          <h3 style="font-size:14.5px;margin-bottom:2px">Zakaj TV učinek upada</h3>
+          <div style="font-size:12.5px;color:var(--ink-3);margin-bottom:14px">izbrane raziskave o pozornosti in gledanosti</div>
+          <div class="rlist" id="tvresearch"></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
   <!-- BUILD-UP -->
   <section class="block">
     <div class="block-h">
@@ -791,6 +826,12 @@ footer a{cursor:pointer}
       </article>
 
       <article class="gcard model"><div class="gtag model">Naš model</div>
+        <h4>Upad TV pozornosti / učinka</h4>
+        <p class="gdef">Opcijska korekcija: TV GRP šteje izpostavljenost, ne pozornosti. Zaradi drugega zaslona, staranja občinstva in upada linearne TV en GRP danes dostavi manj pozornosti kot prej.</p>
+        <p class="glay"><b>Po domače:</b> med oglasom večina gleda v telefon. TV »doseg« je še tam, pozornost pa ne — zato TV korigiramo navzdol.</p>
+      </article>
+
+      <article class="gcard model"><div class="gtag model">Naš model</div>
         <h4>Relevanca glede na Slovenijo</h4>
         <p class="gdef">Doseg in skupnost osebne blagovne znamke, izražena kot delež populacije Slovenije (~2,1 mio).</p>
         <p class="glay"><b>Po domače:</b> koliko odstotkov države »zajameš« z eno epizodo oz. s svojo skupnostjo — kontekst, ki pove, kako velika znamka si.</p>
@@ -822,6 +863,8 @@ footer a{cursor:pointer}
         <p>Surova impresija podceni podcast: <b>host-read integracija</b> nosi pozornost in zaupanje (pribitek), medtem ko <b>prekrivanje omrežij</b> pomeni, da seštevek stikov ni unikatni doseg (netiranje). Oba faktorja sta eksplicitna in uredljiva.</p>
         <h4>Kredibilnostni učinek (creator) — opcijska korekcija</h4>
         <p>Raziskave kažejo, da priporočilo voditelja/creatorja proži večji <b>oglasni učinek</b> kot enak TV ali klasični oglas: host-read dvigne nakupno namero za <b>+50–67 %</b>, podcast oglas doseže <b>80 %</b> priklic (proti 45 % mobilni / 35 % namizni digital), poslušalci so <b>5×</b> bolj nagnjeni k angažiranju, Nielsen pa ugotavlja, da influencer programi <b>presegajo</b> TV oglase. Modul to izrazi kot multiplikator: en podcast stik ≈ ×N TV stikov po učinku → strošek <b>enakega učinka</b> na TV. Privzeto izklopljeno (konservativno); vklopljivo z uredljivim multiplikatorjem (privzeto ×1,5).</p>
+        <h4>Upad TV učinka — opcijska korekcija</h4>
+        <p>GRP šteje izpostavljenost, ne pozornosti. Linearna TV (broadcast + kabel) je jul. 2023 <b>prvič padla pod 50 %</b> časa gledanja (kabel <b>−12,5 %</b> letno), občinstvo se stara, med oglasi pa <b>52 %</b> gledalcev 45–54 let brska po telefonu (do 2027 ~82 % populacije); <b>45,8 %</b> tržnikov navaja drugi zaslon kot glavno oviro učinkovitosti TV. Isti GRP zato dostavi manj resnične pozornosti kot prej. Modul (privzeto izklopljen, uredljiv delež) izrazi to kot <b>efektivni strošek na pozoren TV kontakt</b>.</p>
         <h4>Relevanca glede na Slovenijo</h4>
         <p>Doseg epizode in skupnost osebne blagovne znamke izrazimo kot delež populacije Slovenije (~2,1 mio, uredljivo). To umesti velikost znamke v nacionalni kontekst — argument, ki mu klasičen medijski zakup pogosto ne pripiše teže.</p>
         <h4>Podatkovni vzorec</h4>
@@ -840,6 +883,8 @@ footer a{cursor:pointer}
         <a href="https://theharrispoll.com/articles/podcast-advertising-research/" target="_blank" rel="noopener">The Harris Poll / Audacy — učinek host-read oglasov</a> ·
         <a href="https://www.nielsen.com/insights/2020/host-read-podcast-ads-pack-a-brand-recall-punch/" target="_blank" rel="noopener">Nielsen — priklic host-read podcast oglasov</a> ·
         <a href="https://www.nielsen.com/insights/2022/getting-closer-influencers-help-brands-build-more-personal-consumer-connections/" target="_blank" rel="noopener">Nielsen — influencerji &amp; zaupanje</a> ·
+        <a href="https://variety.com/2023/digital/news/linear-tv-viewing-share-low-streaming-record-high-nielsen-1235696629/" target="_blank" rel="noopener">Nielsen The Gauge — linearna TV pod 50 %</a> ·
+        <a href="https://www.emarketer.com/content/second-screen-viewing-goes-mainstream-raising-ad-recall-risks" target="_blank" rel="noopener">eMarketer / MNTN — drugi zaslon</a> ·
         AGB Nielsen SI · Interni benchmark vprašalnik Macarol Show (2026).
       </div>
       <div class="disclaimer" id="disclaimer"></div>
@@ -900,6 +945,14 @@ footer a{cursor:pointer}
             <div class="bs"><a href="https://www.nielsen.com/insights/2020/host-read-podcast-ads-pack-a-brand-recall-punch/" target="_blank" rel="noopener">Nielsen — Host-Read Recall, 2020</a></div></div>
           <div class="bitem"><div class="bf">Influencerji gradijo bolj osebne povezave; osebna priporočila najbolj zaupan format; influencer programi <b>presegajo</b> TV oglase.</div>
             <div class="bs"><a href="https://www.nielsen.com/insights/2022/getting-closer-influencers-help-brands-build-more-personal-consumer-connections/" target="_blank" rel="noopener">Nielsen — Trust in Advertising / Influencers, 2022</a></div></div>
+        </div>
+
+        <div class="bgroup">
+          <h4>Upad TV učinka &amp; pozornosti</h4>
+          <div class="bitem"><div class="bf">Linearna TV (broadcast + kabel) je <b>prvič padla pod 50 %</b> časa gledanja; streaming rekordnih 38,7 %; kabel <b>−12,5 %</b> letno.</div>
+            <div class="bs"><a href="https://www.nielsen.com/insights/2023/streaming-climbs-to-record-high-in-july-linear-tv-falls-below-50/" target="_blank" rel="noopener">Nielsen — The Gauge, jul. 2023</a> · <a href="https://variety.com/2023/digital/news/linear-tv-viewing-share-low-streaming-record-high-nielsen-1235696629/" target="_blank" rel="noopener">Variety</a></div></div>
+          <div class="bitem"><div class="bf">Drugi zaslon je mainstream: <b>52 %</b> gledalcev 45–54 let med TV brska po telefonu (prej 39 %); do 2027 <b>~82 %</b> populacije; <b>45,8 %</b> tržnikov navaja to kot glavno oviro TV oglasov.</div>
+            <div class="bs"><a href="https://www.emarketer.com/content/second-screen-viewing-goes-mainstream-raising-ad-recall-risks" target="_blank" rel="noopener">eMarketer</a> · <a href="https://research.mountain.com/trends/second-screening-among-older-tv-viewers-has-nearly-doubled/" target="_blank" rel="noopener">MNTN Research</a></div></div>
         </div>
 
         <div class="bgroup">
@@ -1005,7 +1058,7 @@ const PRESETS = {
   prazno: {platforms:mkPlatforms(true),  sponsor:[0,0], followers:0}
 };
 const DEFAULTS = {universe:900000, cpp:120, spot:3000, integ:1.3, dedup:0.8, attnOn:true,
-                  popSI:2100000, credOn:false, credMult:1.5};
+                  popSI:2100000, credOn:false, credMult:1.5, tvDecayOn:false, tvAttn:0.65};
 
 /* ---------- stanje ---------- */
 let S = {preset:'macarol', platforms:clone(PRESETS.macarol.platforms), followers:PRESETS.macarol.followers, ...clone(DEFAULTS)};
@@ -1050,6 +1103,10 @@ function compute(){
   const effMult      = S.credOn? S.credMult : 1;
   const effectTvMatch= tvMatch*effMult;       // TV strošek za enak oglasni UČINEK
   const effectDelta  = effectTvMatch-tvMatch;
+  /* upad TV pozornosti / učinka */
+  const tvEff        = S.tvDecayOn? S.tvAttn : 1;   // delež pozornosti, ki jo TV GRP še dostavi
+  const cptEff       = tvEff? cpt/tvEff : cpt;      // cena na resnično pozoren TV kontakt
+  const tvMatchEff   = tvMatch*tvEff;              // efektivno dostavljena TV vrednost
   /* relevanca osebne blagovne znamke glede na Slovenijo */
   const pop      = S.popSI, fol=S.followers;
   const reachPct = pop? reach/pop : 0;
@@ -1057,7 +1114,8 @@ function compute(){
   const folPct   = pop? fol/pop : 0;
   return {rows,reach,qreach,media,cpt,grpTotal,tvMatch,basisTotal,effCPM,rawCPM,qCPM,util,netReach,
           recLow,recHigh,ratio,spots,uni,cpp,attn,
-          effMult,effectTvMatch,effectDelta,pop,fol,reachPct,netPct,folPct};
+          effMult,effectTvMatch,effectDelta,pop,fol,reachPct,netPct,folPct,
+          tvEff,cptEff,tvMatchEff};
 }
 
 /* ---------- render ---------- */
@@ -1169,6 +1227,23 @@ function renderExceptTableInputs(){
     rItem('80 %','priklic podcast oglasa proti 45 % (mobilni) in 35 % (namizni) digitalni oglas.<span class="rsrc">Nielsen</span>'),
     rItem('5×','večja verjetnost angažiranja z oglasom, ko ga prebere <b>voditelj sam</b>.<span class="rsrc">podcast advertising research</span>'),
     rItem('#1','osebna priporočila so najbolj zaupanja vreden format; Nielsen: influencer programi <b>presegajo</b> TV oglase.<span class="rsrc">Nielsen — Trust in Advertising</span>'),
+  ].join('');
+
+  /* modul upada TV učinka */
+  const tv2=document.getElementById('tvresult');
+  const tsw=document.getElementById('tvdecay');
+  if(d.tvEff<1){
+    tv2.className='credresult tvv';
+    tv2.innerHTML=`<div class="cr-big">${nf0.format(d.tvEff*100)} %</div><div class="cr-lbl">pozornosti, ki jo TV GRP <b>nakazuje</b>, danes dejansko doseže gledalca. Efektivni strošek na <b>pozoren</b> TV kontakt zraste na <b>${EUR2(d.cptEff)}</b>/1000 (namesto ${EUR2(d.cpt)}) — kar dodatno razširi prednost podcasta.</div>`;
+  } else {
+    tv2.className='credresult tvv off';
+    tv2.innerHTML=`<div class="cr-big">Korekcija izklopljena</div><div class="cr-lbl">Vklopi, da TV primerjaš po <b>dejansko dostavljeni pozornosti</b> — GRP šteje izpostavljenost, ne pozornosti.</div>`;
+  }
+  document.getElementById('tvresearch').innerHTML = [
+    rItem('&lt; 50 %','linearna TV (broadcast + kabel) je <b>prvič padla pod polovico</b> časa gledanja; streaming 38,7 %.<span class="rsrc">Nielsen — The Gauge, jul. 2023</span>'),
+    rItem('52 %','gledalcev 45–54 let med gledanjem TV <b>brska po telefonu</b> (prej 39 %); do 2027 ~82 % populacije.<span class="rsrc">eMarketer / MNTN, 2025</span>'),
+    rItem('45,8 %','tržnikov navaja <b>motnjo drugega zaslona</b> kot glavno oviro učinkovitosti TV oglasov.<span class="rsrc">eMarketer</span>'),
+    rItem('−12,5 %','upad gledanja <b>kabelske TV</b> v enem letu; mlajše občinstvo linearno TV zapušča.<span class="rsrc">Nielsen — The Gauge</span>'),
   ].join('');
 
   /* versus */
@@ -1301,8 +1376,10 @@ updaters.push(bindRange('spot','spot',v=>EUR(+v)));
 updaters.push(bindRange('integ','integ',v=>'×'+nf2.format(+v)));
 updaters.push(bindRange('dedup','dedup',v=>'×'+nf2.format(+v)));
 updaters.push(bindRange('credmult','credMult',v=>'×'+nf2.format(+v)));
+updaters.push(bindRange('tvattn','tvAttn',v=>nf0.format(+v*100)+' %'));
 
 document.getElementById('cred').addEventListener('change',e=>{ S.credOn=e.target.checked; renderExceptTableInputs(); });
+document.getElementById('tvdecay').addEventListener('change',e=>{ S.tvDecayOn=e.target.checked; renderExceptTableInputs(); });
 document.getElementById('popSI').addEventListener('input',e=>{ S.popSI=Math.max(1,+e.target.value||1); renderExceptTableInputs(); });
 document.getElementById('followers').addEventListener('input',e=>{ S.followers=Math.max(0,+e.target.value||0); renderExceptTableInputs(); });
 
@@ -1350,10 +1427,12 @@ document.getElementById('reset').addEventListener('click',()=>{
   document.getElementById('integ').value=S.integ;
   document.getElementById('dedup').value=S.dedup;
   document.getElementById('credmult').value=S.credMult;
+  document.getElementById('tvattn').value=S.tvAttn;
   document.getElementById('popSI').value=S.popSI;
   document.getElementById('followers').value=S.followers;
   document.getElementById('attn').checked=S.attnOn;
   document.getElementById('cred').checked=S.credOn;
+  document.getElementById('tvdecay').checked=S.tvDecayOn;
   document.querySelectorAll('#uni_seg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.uni==='900000'?'true':'false'));
   syncCtlLabels(); render();
 });
@@ -1365,6 +1444,7 @@ function syncCtlLabels(){
   document.getElementById('integ_v').textContent='×'+nf2.format(S.integ);
   document.getElementById('dedup_v').textContent='×'+nf2.format(S.dedup);
   document.getElementById('credmult_v').textContent='×'+nf2.format(S.credMult);
+  document.getElementById('tvattn_v').textContent=nf0.format(S.tvAttn*100)+' %';
 }
 
 /* ---------- tema ---------- */
