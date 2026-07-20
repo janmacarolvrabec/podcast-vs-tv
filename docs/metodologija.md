@@ -18,7 +18,7 @@ Za vsako omrežje/format:
 - **Doseg (T+30)** — stiki 30 dni po objavi (nativni števci platform; audio = streams/plays).
 - **CPM (€)** — tržna cena na 1000 impresij za ta format.
 
-Privzete vrednosti so realni podatki oddaje **Macarol Show** (povprečje 5 zaporednih epizod, mar–apr 2026). Pomembno: navedene številke so **seštevek stikov po platformah**, ne unikatni doseg (isti človek lahko vidi vsebino na več omrežjih).
+Privzete vrednosti so realni podatki podcasta **Macarol Show** (povprečje 5 zaporednih epizod, mar–apr 2026). Pomembno: navedene številke so **seštevek stikov po platformah**, ne unikatni doseg (isti človek lahko vidi vsebino na več omrežjih).
 
 ### Privzeti CPM po formatih (tržne ocene, uredljivo)
 

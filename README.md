@@ -28,6 +28,14 @@ Odpri `index.html` v brskalniku. Ni odvisnosti, ni build koraka — vse (podatki
 4. **Primerjava na tisoč kontaktov.** `CPT_TV = CPP × 100.000 ÷ ciljna skupina`; efektivni podcast CPM primerjamo s TV CPT.
 5. **Kakovostne prilagoditve.** Pribitek za host-read integracijo, netiranje prekrivanja omrežij → priporočeni razpon cene.
 
+### Kredibilnostni učinek (creator) — opcijski modul
+
+Raziskave kažejo, da priporočilo voditelja/creatorja proži **večji oglasni učinek** kot enak TV ali klasični oglas: host-read dvigne nakupno namero za **+50–67 %**, podcast oglas doseže **80 %** priklic (proti 45 % mobilni / 35 % namizni digital), poslušalci so **5×** bolj nagnjeni k angažiranju, Nielsen pa ugotavlja, da influencer programi **presegajo** TV oglase. Modul (privzeto izklopljen, uredljiv multiplikator) izrazi to kot strošek **enakega oglasnega učinka** na TV.
+
+### Relevanca glede na Slovenijo
+
+Doseg epizode in skupnost osebne blagovne znamke sta izražena kot **delež populacije Slovenije** (~2,1 mio, uredljivo) — nacionalni kontekst, ki mu klasičen medijski zakup pogosto ne pripiše teže.
+
 ### Zakaj ne vrednotimo vseh platform enako
 
 En ogled cele epizode na YouTubu (ki v tujini nadomešča linearno TV v dnevni sobi) ni enakovreden bežnemu prehodu Reels med drsanjem. Zato platforme utežimo po pozornosti — YouTube in audio nosita TV-primerljivo težo, drsni formati manj. To iz "surovega večkrat ceneje" naredi pošteno primerjavo, ki je tipično blizu **TV parnosti** — verodostojnejši prodajni argument.
