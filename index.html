@@ -246,7 +246,35 @@ table.data tr.total td:first-child{color:var(--ink)}
 .method code{font-family:var(--mono);font-size:12px;background:var(--surface-3);padding:1px 5px;border-radius:5px;color:var(--ink)}
 .sources{font-size:12.5px;color:var(--ink-3);margin-top:10px;line-height:1.7}
 .disclaimer{margin-top:18px;padding:14px 16px;border:1px dashed var(--line-strong);border-radius:11px;background:var(--surface-2);font-size:12.5px;color:var(--ink-2)}
-footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* shared CTA buttons */
+.cta-row{display:flex;flex-wrap:wrap;gap:10px}
+.cta-btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:13.5px;font-weight:660;
+  border-radius:11px;padding:11px 17px;cursor:pointer;text-decoration:none;border:1px solid transparent;
+  transition:transform .12s,filter .12s,border-color .12s,color .12s}
+.cta-btn svg{width:17px;height:17px;flex:none}
+.cta-btn.primary{background:var(--pod);color:#fff;box-shadow:0 2px 10px color-mix(in srgb,var(--pod) 35%,transparent)}
+.cta-btn.primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.cta-btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--line-strong)}
+.cta-btn.ghost:hover{border-color:var(--pod);color:var(--pod);transform:translateY(-1px)}
+
+/* footer */
+.site-footer{margin-top:52px}
+.foot-cta{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  background:linear-gradient(135deg, color-mix(in srgb,var(--pod) 7%,var(--surface)), var(--surface));
+  border:1px solid var(--line);border-radius:18px;padding:24px 26px;box-shadow:var(--shadow)}
+.foot-cta-h{font-size:19px;font-weight:750;letter-spacing:-.01em}
+.foot-cta-s{font-size:13.5px;color:var(--ink-2);margin-top:5px;max-width:48ch;line-height:1.5}
+.foot-bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding:26px 4px 4px;margin-top:6px;border-top:1px solid var(--line)}
+.foot-brand{display:flex;align-items:center;gap:13px}
+.foot-mic{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--pod),var(--tv));
+  display:flex;align-items:center;justify-content:center;flex:none}
+.fb-name{font-weight:720;font-size:14.5px;letter-spacing:-.01em}
+.fb-tag{font-size:12.5px;color:var(--ink-3);margin-top:2px;max-width:52ch;line-height:1.45}
+.foot-meta{display:flex;flex-direction:column;gap:6px;align-items:flex-end;font-size:12.5px;color:var(--ink-3);text-align:right}
+.foot-meta a{color:var(--ink-2);font-weight:600}
+.foot-meta .fm-priv{display:inline-flex;align-items:center;gap:6px}
+@media(max-width:640px){.foot-cta{padding:18px 20px}.foot-bottom{flex-direction:column}.foot-meta{align-items:flex-start;text-align:left}}
 
 /* glossary */
 .gloss-intro{display:flex;flex-wrap:wrap;gap:16px;margin:-2px 0 16px;font-size:12.5px;color:var(--ink-2)}
@@ -1073,7 +1101,17 @@ footer a{cursor:pointer}
             <a href="https://www.tiktok.com/@janmacarol" target="_blank" rel="noopener" style="--acc:var(--f-tiktok)"><i></i>TikTok</a>
             <a href="https://x.com/JMacarolV" target="_blank" rel="noopener" style="--acc:var(--f-x)"><i></i>X / Twitter</a>
           </div>
-          <div class="contactline">Oglaševanje &amp; sodelovanja: <a href="mailto:janja.prijatelj@citymagazine.si">janja.prijatelj@citymagazine.si</a> (Janja Prijatelj, producentka)</div>
+          <div class="cta-row" style="margin-top:16px">
+            <a class="cta-btn primary" href="mailto:janja.prijatelj@citymagazine.si?subject=Ogla%C5%A1evanje%20na%20podcastu%20Macarol%20Show">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+              Oglaševanje &amp; sodelovanje
+            </a>
+            <a class="cta-btn ghost" href="assets/Macarol-produkcijski-nacrt-2026-27.pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+              Produkcijski načrt (PDF)
+            </a>
+          </div>
+          <div class="contactline" style="margin-top:12px">Producentka: <b>Janja Prijatelj</b> · <a href="mailto:janja.prijatelj@citymagazine.si">janja.prijatelj@citymagazine.si</a></div>
         </div>
       </div>
       <div class="disclaimer" style="margin-top:20px">
@@ -1082,13 +1120,37 @@ footer a{cursor:pointer}
     </div></div>
   </section>
 
-  <footer>
-    <span><b>Kalkulator vrednosti podcastov</b> — koliko je oglasno vredna prisotnost na podcastu · osnovno orodje za medijsko planiranje.<br>
-      Oglaševanje &amp; sodelovanje: <a href="mailto:janja.prijatelj@citymagazine.si">janja.prijatelj@citymagazine.si</a> ·
-      <a href="assets/Macarol-produkcijski-nacrt-2026-27.pdf" target="_blank" rel="noopener">Produkcijski načrt 2026/27 (PDF) ↗</a><br>
-      🔒 Ta stran <b>ne uporablja piškotkov</b> in <b>ne beleži</b> uporabe kalkulatorja. ·
-      <a id="openTerms">Pogoji uporabe</a> · <a id="openPrivacy">Zasebnost</a></span>
-    <span class="muted">Vsi zneski v € · na epizodo, če ni navedeno drugače.</span>
+  <footer class="site-footer">
+    <div class="foot-cta">
+      <div>
+        <div class="foot-cta-h">Zanima te oglaševanje na podcastu?</div>
+        <div class="foot-cta-s">Pridobi produkcijski načrt s ceniki in dosegom ekosistema — ali nam kar piši. Odgovorimo hitro.</div>
+      </div>
+      <div class="cta-row">
+        <a class="cta-btn primary" href="mailto:janja.prijatelj@citymagazine.si?subject=Ogla%C5%A1evanje%20na%20podcastu%20Macarol%20Show">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+          Oglaševanje &amp; sodelovanje
+        </a>
+        <a class="cta-btn ghost" href="assets/Macarol-produkcijski-nacrt-2026-27.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
+          Produkcijski načrt (PDF)
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="foot-brand">
+        <span class="foot-mic"><svg width="21" height="21" viewBox="0 0 32 32"><rect x="12" y="5" width="8" height="13" rx="4" fill="#fff"/><path d="M9 14a7 7 0 0 0 14 0" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><line x1="16" y1="21" x2="16" y2="25.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/><line x1="11.5" y1="26.5" x2="20.5" y2="26.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round"/></svg></span>
+        <div>
+          <div class="fb-name">Kalkulator vrednosti podcastov</div>
+          <div class="fb-tag">Koliko je oglasno vredna prisotnost na podcastu · osnovno orodje za medijsko planiranje.</div>
+        </div>
+      </div>
+      <div class="foot-meta">
+        <span class="fm-priv">🔒 Brez piškotkov · uporaba se ne beleži</span>
+        <span><a id="openTerms">Pogoji uporabe</a> · <a id="openPrivacy">Zasebnost</a></span>
+        <span class="muted">Vsi zneski v € · na epizodo, če ni navedeno drugače.</span>
+      </div>
+    </div>
   </footer>
 </div>
 
