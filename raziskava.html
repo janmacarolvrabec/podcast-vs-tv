@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video na drugem kanalu? Zakaj podcast ni le TV z manj gledalci — strokovni zapis</title>
+<meta name="description" content="Strokovni zapis o vrednotenju oglaševanja na podcastu: zakaj skupni imenovalec s TV zavaja, kako uteževati pozornost formatov, kredibilnostni učinek creatorja in upad TV učinka. Metodologija in odločitve za Podcast × TV valuator.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#d83a3a">
+<link rel="canonical" href="https://janmacarolvrabec.github.io/podcast-vs-tv/raziskava.html">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:title" content="Video na drugem kanalu? Zakaj podcast ni le TV z manj gledalci">
+<meta property="og:description" content="Strokovni zapis: zakaj skupni imenovalec s TV zavaja pri vrednotenju podcastov — pozornost, kredibilnost in upad TV učinka.">
+<meta property="og:image" content="https://janmacarolvrabec.github.io/podcast-vs-tv/assets/og-stevilka.png">
+<meta property="og:url" content="https://janmacarolvrabec.github.io/podcast-vs-tv/raziskava.html">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#fbfcfd; --surface:#ffffff; --surface-2:#f3f5f8;
+  --ink:#14181f; --ink-2:#3f4854; --ink-3:#78828f;
+  --line:#e4e8ee; --line-2:#d3d9e2;
+  --pod:#d0362f; --tv:#2a6fd6;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])){
+  color-scheme: dark;
+  --paper:#0d1117; --surface:#161b22; --surface-2:#1b222c;
+  --ink:#e9edf3; --ink-2:#b3bdc9; --ink-3:#7d8794;
+  --line:#242c37; --line-2:#313b48;
+  --pod:#f0645c; --tv:#5b9bf0;
+}}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#0d1117; --surface:#161b22; --surface-2:#1b222c;
+  --ink:#e9edf3; --ink-2:#b3bdc9; --ink-3:#7d8794;
+  --line:#242c37; --line-2:#313b48;
+  --pod:#f0645c; --tv:#5b9bf0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:19px;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px 96px}
+a{color:var(--tv);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--tv) 35%,transparent)}
+a:hover{border-bottom-color:var(--tv)}
+.sans{font-family:var(--sans)}
+.mono{font-family:var(--mono)}
+
+/* top bar */
+.topbar{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--paper) 90%,transparent);
+  backdrop-filter:blur(8px);position:sticky;top:0;z-index:10}
+.topbar-in{max-width:720px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:12px;font-family:var(--sans)}
+.topbar .mk{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.02em;color:var(--ink)}
+.topbar .mk .m{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--pod),var(--tv))}
+.topbar .back{margin-left:auto;font-size:13px;font-family:var(--sans);font-weight:600}
+
+/* masthead */
+header.art{padding:64px 0 34px;border-bottom:2px solid var(--ink);margin-bottom:44px}
+.eyebrow{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pod);margin-bottom:20px}
+h1{font-family:var(--sans);font-size:clamp(32px,5.4vw,50px);line-height:1.06;letter-spacing:-.02em;font-weight:800;margin:0;text-wrap:balance}
+.standfirst{font-size:22px;line-height:1.5;color:var(--ink-2);margin:22px 0 0;font-style:italic}
+.byline{font-family:var(--sans);font-size:13.5px;color:var(--ink-3);margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.byline b{color:var(--ink)}
+.byline .sep{width:4px;height:4px;border-radius:50%;background:var(--line-2)}
+
+/* abstract */
+.abstract{background:var(--surface-2);border-left:3px solid var(--pod);border-radius:0 10px 10px 0;
+  padding:20px 24px;margin:0 0 44px;font-size:17.5px;line-height:1.62}
+.abstract .lbl{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pod);margin-bottom:8px}
+
+/* body */
+h2{font-family:var(--sans);font-size:15px;font-weight:800;letter-spacing:.02em;color:var(--ink);
+  margin:52px 0 6px;padding-top:26px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:baseline}
+h2 .no{font-size:13px;color:var(--pod);font-variant-numeric:tabular-nums;font-weight:800}
+h2 .tx{font-size:25px;letter-spacing:-.01em;line-height:1.15}
+h2{flex-direction:column;gap:4px}
+h3{font-family:var(--sans);font-size:18px;font-weight:750;margin:32px 0 4px;letter-spacing:-.01em}
+p{margin:18px 0}
+.lead::first-letter{font-family:var(--sans);float:left;font-size:66px;line-height:.82;font-weight:800;
+  padding:6px 12px 0 0;color:var(--pod)}
+strong{font-weight:700}
+em{font-style:italic}
+.pull{font-family:var(--sans);font-size:24px;line-height:1.35;font-weight:700;letter-spacing:-.01em;
+  color:var(--ink);border-left:4px solid var(--tv);padding:6px 0 6px 22px;margin:38px 0}
+ul,ol{margin:18px 0;padding-left:26px}
+li{margin:9px 0}
+.note{font-size:16px;color:var(--ink-2)}
+
+/* figure / table */
+figure{margin:34px 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+figure .cap{font-family:var(--sans);font-size:12.5px;color:var(--ink-3);padding:12px 18px;border-top:1px solid var(--line);background:var(--surface-2)}
+figure .cap b{color:var(--ink-2)}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px}
+th,td{padding:11px 18px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);font-weight:700}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+tr:last-child td{border-bottom:0}
+.w-hi td.n{color:var(--pod)}
+.formula{font-family:var(--mono);font-size:15px;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:10px;padding:16px 18px;margin:26px 0;line-height:1.7;overflow-x:auto}
+.formula b{color:var(--pod)}
+
+/* references */
+.refs{margin-top:16px;font-family:var(--sans)}
+.refs ol{padding-left:0;list-style:none;counter-reset:r}
+.refs li{counter-increment:r;font-size:14px;line-height:1.5;color:var(--ink-2);padding-left:34px;position:relative;margin:12px 0}
+.refs li::before{content:counter(r);position:absolute;left:0;top:0;font-family:var(--mono);font-size:12px;font-weight:700;
+  color:var(--pod);background:var(--surface-2);border:1px solid var(--line);width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+
+/* author box */
+.author{font-family:var(--sans);margin-top:56px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.author-top{display:flex;gap:18px;align-items:center}
+.avatar{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,var(--pod),var(--tv));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:800;flex:none}
+.author .an{font-size:18px;font-weight:750}
+.author .ar{font-size:13px;color:var(--ink-3);margin-top:2px}
+.author p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.cta{display:inline-block;margin-top:6px;font-family:var(--sans);font-weight:700;font-size:14.5px;
+  background:var(--pod);color:#fff;border-radius:10px;padding:11px 18px;border-bottom:0}
+.cta:hover{filter:brightness(1.06);border-bottom:0}
+.author .contact{font-size:14px;color:var(--ink-2);margin-top:16px}
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--sans);font-size:12.5px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="mk"><span class="m"></span>Podcast × TV valuator</span>
+    <a class="back" href="index.html">← Nazaj na kalkulator</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="art">
+    <div class="eyebrow">Strokovni zapis · vrednotenje medijev</div>
+    <h1>Video na drugem kanalu? Zakaj podcast ni le TV z manj gledalci</h1>
+    <p class="standfirst">Ko oglaševalski trg podcast stlači na skupni imenovalec s televizijo, ga sistematično napačno ovrednoti — v obe smeri. Tukaj je, zakaj, in kako smo se odločili meriti drugače.</p>
+    <div class="byline">
+      <span>Avtor: <b>Jan Macarol</b></span><span class="sep"></span>
+      <span>Macarol Show · City Magazine</span><span class="sep"></span>
+      <span>Metodološki zapis za Podcast × TV valuator</span>
+    </div>
+  </header>
+
+  <div class="abstract">
+    <div class="lbl">Povzetek</div>
+    Prevladujoč način vrednotenja pojavnosti na podcastu je reduktiven: obravnava ga kot »video ali avdio na drugem kanalu« in ga meri z isto valuto kot televizijo — bruto stiki, GRP-ekvivalent, cena na tisoč. Ta skupni imenovalec izniči tri stvari, ki nosijo večino vrednosti: <strong>neenako pozornost po formatih</strong>, <strong>kredibilnostni učinek osebne blagovne znamke</strong> in <strong>dejstvo, da televizija ne dostavlja več pozornosti, kot jo je nekoč</strong>. V nadaljevanju iz javno dostopnih raziskav izpeljemo, zakaj vsak od teh dejavnikov utežimo, in kako se sestavijo v realno vrednost ene epizode.
+  </div>
+
+  <p class="lead">Vsak medijski zakupnik ima najljubši trik: novo stvar prevede v staro. Podcast tako hitro postane »TV, samo z manj gledalci« ali »YouTube z zvokom« — in ko je enkrat na tej polici, se ceni po pravilih te police. Šteje se doseg, deli s tisoč, primerja z GRP. Elegantno, znano, in v jedru napačno.</p>
+
+  <p>Problem ni v tem, da je primerjava s TV nedopustna — nasprotno, TV je edina valuta, ki jo oglaševalec intuitivno razume, zato jo tudi <em>mi</em> uporabljamo kot referenco. Problem je v <strong>skupnem imenovalcu</strong>: predpostavki, da je en podcast stik enakovreden enemu TV stiku, in da so vsi podcast stiki med seboj enaki. Oboje je napačno — in napaka teče v obe smeri hkrati.</p>
+
+  <p class="pull">Skupni imenovalec podcast hkrati podceni (spregleda pozornost in zaupanje) in napačno uokviri (predpostavi, da je stik = stik).</p>
+
+  <h2><span class="tx"><span class="no">01 —</span> Zakaj skupni imenovalec zavaja</span></h2>
+  <p>GRP (Gross Rating Point) je valuta izpostavljenosti, ne pozornosti. Meri, koliko odstotkov ciljne skupine je imelo <em>priložnost</em> videti oglas, ne koliko jih je dejansko gledalo. Ta poenostavitev je desetletja delovala, ker je bila televizija »lean-back« medij: gledalec je sedel pred zaslonom in ni imel kam pobegniti med oglasnim blokom.</p>
+  <p>Podcast te predpostavke ne izpolnjuje na nobenem koncu. Njegov »stik« sega od dvournega, namernega poslušanja z ušesnimi slušalkami do trisekundnega preleta Reela med čakanjem v vrsti. Ko oboje seštejemo v eno »impresijo« in delimo s tisoč, uničimo prav tisto informacijo, ki določa vrednost. Rezultat je cena, ki je za avdio prenizka in za drseče formate previsoka — povprečje, ki ne opiše nikogar.</p>
+  <p>Zato model ne zavrže TV primerjave, temveč jo <strong>popravi na treh mestih</strong>, kjer skupni imenovalec pušča: pri pozornosti formata, pri kredibilnosti vira in pri stanju same televizije.</p>
+
+  <h2><span class="tx"><span class="no">02 —</span> Pozornost ni enakomerna: zakaj uteževamo formate</span></h2>
+  <p>Prva korekcija je pozornostni koeficient — utež, ki vsakemu stiku pripiše, koliko »TV-vredne« pozornosti dejansko prinese. Odločitve niso arbitrarne, temveč sledijo meritvam pozornosti in gledanosti.</p>
+  <p><strong>YouTube longplay postavimo na 1,00 kot referenco</strong>, ker je danes najbolj TV-podoben in TV dejansko nadomešča: po Nielsenovem poročilu <em>The Gauge</em> je YouTube prvi med vsemi mediji po deležu časa gledanja televizije, gledanost na velikem zaslonu pa je v dveh letih zrasla za 53 % [1]. Kar smo nekoč gledali kot »TV«, je vse pogosteje YouTube v dnevni sobi.</p>
+  <p><strong>Avdio (Spotify, Apple Podcasts) utežimo celo nad YouTube, na 1,10.</strong> To se sprva zdi protiintuitivno, a je dobro podprto: meritve pozornosti Amplified Intelligence uvrščajo avdio na raven televizije ali višje [2]; Edison Research kaže, da dve tretjini poslušalcev poslušata doma in namerno, ne le »v ozadju« [3]; nevroznanstvene (EEG) študije pa pri poslušanju beležijo močno pozornost, pomnjenje in angažiranost [4]. Poslušanje s slušalkami je eno redkih medijskih dejanj brez tekmujočega drugega zaslona — zvok napolni celoten kanal pozornosti.</p>
+  <p><strong>Drseče formate (Reels, Shorts, Stories) utežimo nizko, 0,18–0,35.</strong> Njihova stopnja dokončanja je zavajajoče visoka — a gre za dokončanje 15-sekundnega posnetka med hitrim drsanjem. V absolutnih sekundah pozornosti so daleč zadaj; meritve kažejo, da je za enako pozornost kot na avdiu ali YouTubu treba na teh formatih vložiti približno dvakrat več [2]. So odličen <em>doseg</em>, slab <em>fokus</em>.</p>
+
+  <figure>
+    <table>
+      <thead><tr><th>Format</th><th style="text-align:right">Utež</th><th>Utemeljitev</th></tr></thead>
+      <tbody>
+        <tr class="w-hi"><td>Spotify / Apple (avdio)</td><td class="n">1,10</td><td>namerno poslušanje, brez drugega zaslona</td></tr>
+        <tr><td>YouTube longplay</td><td class="n">1,00</td><td>TV-referenca; nadomešča linearno TV</td></tr>
+        <tr><td>Facebook longplay</td><td class="n">0,55</td><td>daljši video, a nemi autoplay v feedu</td></tr>
+        <tr><td>LinkedIn</td><td class="n">0,50</td><td>profesionalni kontekst, feed</td></tr>
+        <tr><td>TikTok / YT Shorts</td><td class="n">0,35</td><td>kratek, mobilni scroll</td></tr>
+        <tr><td>Instagram Reels / Story</td><td class="n">0,22–0,32</td><td>hiter prelet, efemerno</td></tr>
+        <tr><td>X / Twitter</td><td class="n">0,18</td><td>impresija ni ogled</td></tr>
+      </tbody>
+    </table>
+    <div class="cap"><b>Tabela 1.</b> Privzeti pozornostni koeficienti in njihova utemeljitev. Vse vrednosti so v kalkulatorju uredljive.</div>
+  </figure>
+
+  <h2><span class="tx"><span class="no">03 —</span> Kredibilnost: zakaj creator ni enak oglasu</span></h2>
+  <p>Drugi popravek zadeva učinek, ne dosega. Skupni imenovalec predpostavi, da je vsak stik enako prepričljiv — a priporočilo voditelja, ki mu poslušalec zaupa, ni isto kot posnet oglasni blok. Raziskave to razliko dosledno merijo:</p>
+  <ul>
+    <li>Poslušalci so po host-read priporočilu <strong>za 50–67 % bolj nagnjeni k nakupu</strong> kot po oglasu brez njega [5].</li>
+    <li>Priklic podcast oglasa doseže <strong>80 %</strong>, proti 45 % (mobilni) in 35 % (namizni) digitalni oglas [6].</li>
+    <li>Osebna priporočila so najbolj zaupanja vreden oglasni format; Nielsen ugotavlja, da <strong>influencer programi presegajo TV oglase</strong> [7].</li>
+  </ul>
+  <p>Zato model ponudi <strong>opcijski multiplikator oglasnega učinka</strong> (privzeto ×1,5): en host-read stik šteje kot toliko TV stikov po dejanskem učinku — priklicu, nakupni nameri, angažiranosti. Korekcijo pustimo izklopljivo namerno; ko je izklopljena, model ostane konservativen in prikazana vrednost je zavestno <em>podcenjena</em>.</p>
+
+  <h2><span class="tx"><span class="no">04 —</span> Televizija ni več to, kar je bila</span></h2>
+  <p>Tretji popravek je najbolj nelagoden za tradicionalni zakup: isti TV GRP danes dostavi manj resnične pozornosti kot pred leti. Trije premiki so sočasni in dokumentirani.</p>
+  <p><strong>Linearna TV se krči.</strong> Julija 2023 je linearna televizija (broadcast + kabel) prvič padla pod 50 % časa gledanja v ZDA; kabel je v enem letu izgubil 12,5 % [8]. Občinstvo, ki ga GRP meri, je vse manjše in vse starejše.</p>
+  <p><strong>Drugi zaslon je postal pravilo.</strong> 52 % gledalcev med 45. in 54. letom med gledanjem televizije brska po telefonu (leta 2022 jih je bilo 39 %); do leta 2027 naj bi drugi zaslon uporabljalo okoli 82 % populacije [9]. TV GRP je še vedno dostavljen — pozornost pa odteka v dlan.</p>
+  <p><strong>Tržniki to priznavajo.</strong> 45,8 % odločevalcev navaja motnjo drugega zaslona kot enega ključnih razlogov, da TV kampanje ne dosegajo želenega učinka [9].</p>
+  <p class="pull">Če pozornostno utežimo formate podcasta, moramo pošteno utežiti tudi televizijo.</p>
+  <p>Zato model ponudi še eno opcijsko korekcijo: <strong>delež pozornosti, ki jo TV GRP še dostavi</strong> (privzeto 65 %). Ob vklopu se efektivni strošek na resnično <em>pozoren</em> TV kontakt ustrezno zviša — kar ni napad na televizijo, temveč popravek, ki jo obravnava po istem merilu kot podcast.</p>
+
+  <h2><span class="tx"><span class="no">05 —</span> Relevanca: velikost znamke v nacionalnem merilu</span></h2>
+  <p>Zadnji element ni korekcija, temveč kontekst, ki mu medijski zakup pogosto ne pripiše teže: kolikšen del države pravzaprav nagovori ena epizoda. Izraženo kot delež populacije Slovenije (~2,1 mio) doseg ene epizode in skupnost osebne blagovne znamke nista več abstraktni številki, temveč nacionalno relevanten domet — merilo, po katerem se velike znamke tudi sicer prodajajo.</p>
+
+  <h2><span class="tx"><span class="no">06 —</span> Sinteza: realna vrednost ene epizode</span></h2>
+  <p>Elementi se sestavijo v verigo, ki se v celoti izraža v TV valuti — jeziku, ki ga oglaševalec razume — a brez naivne predpostavke o enakosti stikov:</p>
+  <div class="formula">
+    kakovostni_doseg = Σ (doseg × <b>utež_formata</b>)<br>
+    TV-vrednost = (kakovostni_doseg ÷ ciljna_skupina × 100) × CPP<br>
+    <b>realna_vrednost</b> = TV-vrednost × <b>učinek_creatorja</b> ÷ <b>pozornost_TV</b>
+  </div>
+  <p>Rezultat ni cena sponzorstva (ta je nižja in izpogajana), temveč <strong>TV proračun, ki bi bil danes potreben za enak oglasni učinek</strong> ene epizode. Prav ta preslikava — iz podcast jezika nazaj v TV proračun, a po dejanskem učinku in ne po bruto stiku — je bistvo modela. Za obravnavani vzorec (Macarol Show) znese red velikosti nekaj tisoč evrov nad golo medijsko vrednostjo, kar kaže, kako veliko vrednosti skupni imenovalec izpusti na mizi.</p>
+
+  <h2><span class="tx"><span class="no">07 —</span> Kaj model ni</span></h2>
+  <p>Poštenost zahteva enako jasnost o mejah kot o trditvah. Model <strong>ni uradni cenik</strong> nobene medijske hiše in ne nadomešča panelne meritve. Privzeti CPM, koeficienti in multiplikatorji so tržne oziroma raziskovalne ocene za sidranje pogovora, ne absolutne resnice — zato so <em>vsi</em> uredljivi. Obe učinkovni korekciji sta privzeto izklopljeni oziroma konservativni, doseg je seštevek stikov (ne unikatni doseg), pozornostne uteži pa so izpeljane iz javnih meritev, ne iz meritve tega konkretnega podcasta. Namen je transparentna <strong>argumentacija vrednosti</strong>, ne dokončna cenitev.</p>
+
+  <h2><span class="tx"><span class="no">08 —</span> Sklep</span></h2>
+  <p>Podcast ni televizija z manj gledalci in ni YouTube z zvokom. Je medij z drugačno porazdelitvijo pozornosti, drugačnim odnosom zaupanja in drugačno krivuljo rasti — v času, ko klasična televizija prav to pozornost in zaupanje izgublja. Skupni imenovalec je udoben, a udobje tu stane denar: sistematično prenizko ceni prav tiste lastnosti, zaradi katerih oglaševalci k podcastom sploh prihajajo. Model, ki ga ta zapis utemeljuje, ne zavrže TV primerjave — le zahteva, da je poštena v obe smeri.</p>
+
+  <h2><span class="tx">Viri</span></h2>
+  <div class="refs">
+    <ol>
+      <li>Nielsen, <a href="https://www.nielsen.com/news-center/2025/youtube-maintains-largest-share-of-tv-viewing-among-media-companies-for-third-consecutive-month/" target="_blank" rel="noopener">The Gauge: YouTube ohranja največji delež TV gledanosti</a> (2025).</li>
+      <li>Amplified Intelligence / Adelaide / Dentsu, <a href="https://www.westwoodone.com/blog/2024/08/12/adelaide-attentiveness-measurement-1000-of-am-fm-radio-ads-require-2635-worth-of-facebook-ads-to-achieve-the-same-level-of-attention-audio-platforms-generate-nearly-the-same-attentiveness-as-tv/" target="_blank" rel="noopener">meritve pozornosti po platformah</a> (2024).</li>
+      <li>Edison Research, <a href="https://www.edisonresearch.com/the-podcast-consumer-2024-by-edison-research/" target="_blank" rel="noopener">The Podcast Consumer</a> (2024).</li>
+      <li>Radio, Podcasts and Music Streaming: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11047838/" target="_blank" rel="noopener">EEG in fiziološka analiza pozornosti, pomnjenja in angažiranosti</a> (2024).</li>
+      <li>The Harris Poll / Audacy, <a href="https://theharrispoll.com/articles/podcast-advertising-research/" target="_blank" rel="noopener">host-read oglasi dvigujejo zaupanje in dejanje</a> (2025).</li>
+      <li>Nielsen, <a href="https://www.nielsen.com/insights/2020/host-read-podcast-ads-pack-a-brand-recall-punch/" target="_blank" rel="noopener">Host-Read Podcast Ads Pack a Brand Recall Punch</a> (2020).</li>
+      <li>Nielsen, <a href="https://www.nielsen.com/insights/2022/getting-closer-influencers-help-brands-build-more-personal-consumer-connections/" target="_blank" rel="noopener">Influencerji &amp; osebne potrošniške povezave</a> / Trust in Advertising (2022).</li>
+      <li>Nielsen The Gauge prek <a href="https://variety.com/2023/digital/news/linear-tv-viewing-share-low-streaming-record-high-nielsen-1235696629/" target="_blank" rel="noopener">Variety</a>: linearna TV prvič pod 50 % (2023).</li>
+      <li>eMarketer / MNTN Research, <a href="https://www.emarketer.com/content/second-screen-viewing-goes-mainstream-raising-ad-recall-risks" target="_blank" rel="noopener">drugi zaslon postaja mainstream</a> (2025).</li>
+      <li>Slovenski TV trg: <a href="https://omisli.si/oglasevanje-marketing/tv-oglasevanje/cene/" target="_blank" rel="noopener">Omisli.si — ceniki 2026</a>; Pro Plus / POP TV — Pogoji prodaje; AGB Nielsen SI. Podatki podcasta: interni benchmark vprašalnik Macarol Show (2026).</li>
+    </ol>
+  </div>
+
+  <div class="author">
+    <div class="author-top">
+      <div class="avatar">JM</div>
+      <div>
+        <div class="an">Jan Macarol</div>
+        <div class="ar">Voditelj podcasta Macarol Show · City Magazine</div>
+      </div>
+    </div>
+    <p>Ta zapis je metodološka podlaga za <strong>Podcast × TV valuator</strong> — odprto, uredljivo orodje za oceno vrednosti oglaševanja na podcastu v primerjavi s TV. Kalkulator vsebuje pozornostno uteževanje formatov, kredibilnostni učinek osebne blagovne znamke, korekcijo upada TV pozornosti in relevanco glede na populacijo Slovenije. Vse predpostavke so transparentne in uredljive; privzeti podatki temeljijo na benchmarku podcasta Macarol Show, cene pa na njegovem trenutnem ceniku in paketih za oglaševalce.</p>
+    <a class="cta" href="index.html">Odpri kalkulator in oceni svoj podcast →</a>
+    <div class="contact"><strong>Vabljeni k stiku.</strong> Za sodelovanja, oglaševanje ali metodološka vprašanja pišite avtorju: <a href="mailto:jan.macarol@citymagazine.si">jan.macarol@citymagazine.si</a>.</div>
+  </div>
+
+  <footer>
+    © Macarol Show / City Magazine · Podcast × TV valuator. Strokovni zapis je informativne narave in ne predstavlja uradnega cenika ali zavezujoče ponudbe.
+  </footer>
+</div>
+</body>
+</html>
