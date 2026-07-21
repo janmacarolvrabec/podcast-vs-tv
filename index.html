@@ -338,8 +338,20 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 
 /* finale — realna vrednost */
 .finale{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}
+.finale>*{min-width:0}
 @media(max-width:820px){.finale{grid-template-columns:1fr}}
-.flabel{font-size:12.5px;font-weight:680;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.flabel{font-size:12.5px;font-weight:680;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:9px}
+.qbtn{width:22px;height:22px;border-radius:50%;border:1px solid var(--line-strong);background:var(--surface);color:var(--tv);
+  font-weight:800;font-size:12px;line-height:1;cursor:pointer;font-family:var(--sans);flex:none;padding:0}
+.qbtn:hover,.qbtn[aria-expanded=true]{background:var(--tv);color:#fff;border-color:var(--tv)}
+.finformula{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);
+  border-radius:10px;padding:13px 15px;margin-top:15px;line-height:1.75;overflow-x:auto;white-space:nowrap}
+.finformula b{color:var(--pod);font-weight:700}
+.finhelp{margin-top:18px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--tv);
+  border-radius:0 11px 11px 0;padding:16px 18px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.finhelp[hidden]{display:none}
+.finhelp h4{font-size:13.5px;margin:0 0 8px;color:var(--ink)}
+.finhelp b{color:var(--ink)}
 .bignum{font-size:clamp(48px,9vw,92px);font-weight:850;letter-spacing:-.03em;line-height:.98;margin:8px 0 8px;
   background:linear-gradient(120deg,var(--pod),var(--tv));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
 .fsub{font-size:14px;color:var(--ink-2);line-height:1.5;max-width:44ch}
@@ -454,7 +466,6 @@ footer a{cursor:pointer}
       <span class="onair"><span class="dot"></span>On air</span>
       <span class="t">Podcast&nbsp;×&nbsp;TV valuator<small>Ocena vrednosti oglaševanja · SI</small></span>
     </div>
-    <span class="tvchip" id="tvchip" title="Vrednost ene epizode, izražena v TV valuti — se posodablja sproti nastavitvam"></span>
     <label class="muted" style="font-size:12.5px" for="preset">Vzorec:</label>
     <select id="preset" aria-label="Izbira vzorca">
       <option value="macarol">Macarol Show — realni podatki</option>
@@ -668,7 +679,7 @@ footer a{cursor:pointer}
     <div class="block-h">
       <div>
         <h2>Kredibilnostni učinek osebne blagovne znamke</h2>
-        <p>Raziskave dosledno kažejo, da priporočilo voditelja/creatorja proži bistveno večji oglasni učinek kot enak TV ali klasični oglas — višji priklic, nakupno namero in angažiranost. To je <b>opcijska strokovna korekcija</b>: vklopi jo, če želiš vrednost izraziti po dejanskem učinku, ne le po dosegu.</p>
+        <p>Raziskave dosledno kažejo, da priporočilo voditelja/creatorja proži bistveno večji oglasni učinek kot enak TV ali klasični oglas — višji priklic, nakupno namero in angažiranost. Ta strokovna korekcija je <b>privzeto vključena</b>; izklopiš jo lahko za konservativnejši pogled brez učinka creatorja. Vpliva na sklepni znesek spodaj.</p>
       </div>
     </div>
     <div class="panel"><div class="body">
@@ -677,7 +688,7 @@ footer a{cursor:pointer}
         <div class="credpanel">
           <div class="credhead">
             <h3>Strokovna korekcija</h3>
-            <label class="switchrow" for="cred" style="margin:0">Vklopi <input type="checkbox" id="cred"></label>
+            <label class="switchrow" for="cred" style="margin:0">Vključeno <input type="checkbox" id="cred" checked></label>
           </div>
           <div class="ctl" style="margin-top:14px;margin-bottom:0">
             <label for="credmult">Multiplikator oglasnega učinka <span class="v" id="credmult_v"></span></label>
@@ -700,7 +711,7 @@ footer a{cursor:pointer}
     <div class="block-h">
       <div>
         <h2>TV nima več enakega učinka — pozornost gledalca se drobi</h2>
-        <p>GRP šteje <b>izpostavljenost, ne pozornosti</b>. Danes je linearna TV padla pod polovico časa gledanja, občinstvo se stara, med oglasi pa večina gleda v telefon. Isti TV GRP zato dostavi <b>manj resnične pozornosti</b> kot pred leti. To je <b>opcijska strokovna korekcija</b> — vklopi jo, če želiš TV primerjati po dejansko dostavljeni pozornosti, ne le po nominalnem GRP.</p>
+        <p>GRP šteje <b>izpostavljenost, ne pozornosti</b>. Danes je linearna TV padla pod polovico časa gledanja, občinstvo se stara, med oglasi pa večina gleda v telefon. Isti TV GRP zato dostavi <b>manj resnične pozornosti</b> kot pred leti. Ta strokovna korekcija je <b>privzeto vključena</b>; izklopiš jo lahko, da TV primerjaš po nominalnem GRP. Vpliva na sklepni znesek spodaj.</p>
       </div>
     </div>
     <div class="panel"><div class="body">
@@ -708,7 +719,7 @@ footer a{cursor:pointer}
         <div class="credpanel">
           <div class="credhead">
             <h3>Korekcija TV pozornosti</h3>
-            <label class="switchrow" for="tvdecay" style="margin:0">Vklopi <input type="checkbox" id="tvdecay"></label>
+            <label class="switchrow" for="tvdecay" style="margin:0">Vključeno <input type="checkbox" id="tvdecay" checked></label>
           </div>
           <div class="ctl" style="margin-top:14px;margin-bottom:0">
             <label for="tvattn">Pozornost, ki jo TV GRP še dostavi <span class="v" id="tvattn_v"></span></label>
@@ -723,6 +734,32 @@ footer a{cursor:pointer}
           <div class="rlist" id="tvresearch"></div>
         </div>
       </div>
+    </div></div>
+  </section>
+
+  <!-- SKLEP: VREDNOST OGLAŠEVANJA NA TV ZA ENAK UČINEK -->
+  <section class="block" id="sklep">
+    <div class="block-h">
+      <div>
+        <h2>Vrednost oglaševanja na TV za enak učinek — 1 epizoda</h2>
+        <p>Strokovno utemeljen znesek: koliko bi moral oglaševalec <b>vložiti v TV</b>, da bi danes dosegel <b>enak oglasni učinek</b> kot ena epizoda. Spreminja se z vklopom/izklopom obeh korekcij zgoraj (<b>kredibilnostni učinek creatorja</b> in <b>upad TV pozornosti</b>).</p>
+      </div>
+    </div>
+    <div class="panel"><div class="body">
+      <div class="finale">
+        <div>
+          <div class="flabel">Vrednost oglaševanja na TV za enak učinek
+            <button class="qbtn" id="finQ" aria-expanded="false" aria-label="Kako smo dobili to številko?">?</button>
+          </div>
+          <div class="bignum" id="bignum">€0</div>
+          <div class="fsub" id="bigsub"></div>
+          <div class="finformula" id="finformula"></div>
+          <div class="finale-tiles" id="finaletiles"></div>
+        </div>
+        <div class="buildup" id="finbridge"></div>
+      </div>
+      <div class="finhelp" id="finhelp" hidden></div>
+      <div class="disclaimer" style="margin-top:20px" id="findisc"></div>
     </div></div>
   </section>
 
@@ -746,28 +783,6 @@ footer a{cursor:pointer}
         <div id="tvlang" style="margin-top:6px"></div>
       </div>
     </div>
-  </section>
-
-  <!-- SKLEP: REALNA VREDNOST -->
-  <section class="block" id="sklep">
-    <div class="block-h">
-      <div>
-        <h2>Sklep: realna vrednost 1 epizode — z vsemi elementi</h2>
-        <p>Ko združimo vse — pozornostno utežene formate (audio nad YouTubom, drsni formati nižje), <b>kredibilnostni učinek</b> osebne blagovne znamke in <b>dejanski upad TV pozornosti</b> — dobimo strokovno utemeljeno vrednost ene epizode: TV proračun, potreben za <b>enak oglasni učinek</b> danes.</p>
-      </div>
-    </div>
-    <div class="panel"><div class="body">
-      <div class="finale">
-        <div>
-          <div class="flabel">Strokovno utemeljena vrednost 1 epizode</div>
-          <div class="bignum" id="bignum">€0</div>
-          <div class="fsub" id="bigsub"></div>
-          <div class="finale-tiles" id="finaletiles"></div>
-        </div>
-        <div class="buildup" id="finbridge"></div>
-      </div>
-      <div class="disclaimer" style="margin-top:20px" id="findisc"></div>
-    </div></div>
   </section>
 
   <!-- GLOSSARY -->
@@ -935,9 +950,9 @@ footer a{cursor:pointer}
         <h4>Kakovostne prilagoditve</h4>
         <p>Surova impresija podceni podcast: <b>host-read integracija</b> nosi pozornost in zaupanje (pribitek), medtem ko <b>prekrivanje omrežij</b> pomeni, da seštevek stikov ni unikatni doseg (netiranje). Oba faktorja sta eksplicitna in uredljiva.</p>
         <h4>Kredibilnostni učinek (creator) — opcijska korekcija</h4>
-        <p>Raziskave kažejo, da priporočilo voditelja/creatorja proži večji <b>oglasni učinek</b> kot enak TV ali klasični oglas: host-read dvigne nakupno namero za <b>+50–67 %</b>, podcast oglas doseže <b>80 %</b> priklic (proti 45 % mobilni / 35 % namizni digital), poslušalci so <b>5×</b> bolj nagnjeni k angažiranju, Nielsen pa ugotavlja, da influencer programi <b>presegajo</b> TV oglase. Modul to izrazi kot multiplikator: en podcast stik ≈ ×N TV stikov po učinku → strošek <b>enakega učinka</b> na TV. Privzeto izklopljeno (konservativno); vklopljivo z uredljivim multiplikatorjem (privzeto ×1,5).</p>
+        <p>Raziskave kažejo, da priporočilo voditelja/creatorja proži večji <b>oglasni učinek</b> kot enak TV ali klasični oglas: host-read dvigne nakupno namero za <b>+50–67 %</b>, podcast oglas doseže <b>80 %</b> priklic (proti 45 % mobilni / 35 % namizni digital), poslušalci so <b>5×</b> bolj nagnjeni k angažiranju, Nielsen pa ugotavlja, da influencer programi <b>presegajo</b> TV oglase. Modul to izrazi kot multiplikator: en podcast stik ≈ ×N TV stikov po učinku → strošek <b>enakega učinka</b> na TV. Privzeto vključeno z uredljivim multiplikatorjem (privzeto ×1,5); izklopljivo za konservativnejši pogled.</p>
         <h4>Upad TV učinka — opcijska korekcija</h4>
-        <p>GRP šteje izpostavljenost, ne pozornosti. Linearna TV (broadcast + kabel) je jul. 2023 <b>prvič padla pod 50 %</b> časa gledanja (kabel <b>−12,5 %</b> letno), občinstvo se stara, med oglasi pa <b>52 %</b> gledalcev 45–54 let brska po telefonu (do 2027 ~82 % populacije); <b>45,8 %</b> tržnikov navaja drugi zaslon kot glavno oviro učinkovitosti TV. Isti GRP zato dostavi manj resnične pozornosti kot prej. Modul (privzeto izklopljen, uredljiv delež) izrazi to kot <b>efektivni strošek na pozoren TV kontakt</b>.</p>
+        <p>GRP šteje izpostavljenost, ne pozornosti. Linearna TV (broadcast + kabel) je jul. 2023 <b>prvič padla pod 50 %</b> časa gledanja (kabel <b>−12,5 %</b> letno), občinstvo se stara, med oglasi pa <b>52 %</b> gledalcev 45–54 let brska po telefonu (do 2027 ~82 % populacije); <b>45,8 %</b> tržnikov navaja drugi zaslon kot glavno oviro učinkovitosti TV. Isti GRP zato dostavi manj resnične pozornosti kot prej. Modul (privzeto vključen, uredljiv delež) izrazi to kot <b>efektivni strošek na pozoren TV kontakt</b>.</p>
         <h4>Relevanca glede na Slovenijo</h4>
         <p>Doseg epizode in skupnost osebne blagovne znamke izrazimo kot delež populacije Slovenije (~2,1 mio, uredljivo). To umesti velikost znamke v nacionalni kontekst — argument, ki mu klasičen medijski zakup pogosto ne pripiše teže.</p>
         <h4>Podatkovni vzorec</h4>
@@ -1131,7 +1146,7 @@ const PRESETS = {
   prazno: {platforms:mkPlatforms(true),  sponsor:[0,0], followers:0}
 };
 const DEFAULTS = {universe:900000, cpp:120, spot:3000, integ:1.3, dedup:0.8, attnOn:true,
-                  popSI:2100000, credOn:false, credMult:1.5, tvDecayOn:false, tvAttn:0.65};
+                  popSI:2100000, credOn:true, credMult:1.5, tvDecayOn:true, tvAttn:0.65};
 
 /* ---------- stanje ---------- */
 let S = {preset:'macarol', platforms:clone(PRESETS.macarol.platforms), followers:PRESETS.macarol.followers, ...clone(DEFAULTS)};
@@ -1181,13 +1196,13 @@ function compute(){
   const cptEff       = tvEff? cpt/tvEff : cpt;      // cena na resnično pozoren TV kontakt
   const tvMatchEff   = tvMatch*tvEff;              // efektivno dostavljena TV vrednost
   /* SKLEP: realna vrednost 1 epizode z vsemi elementi (vedno vključi obe korekciji) */
-  const grpQ         = uni? qreach/uni*100 : 0;    // vedno pozornostno uteženo (formati)
+  const grpQ         = uni? qreach/uni*100 : 0;    // pozornostno uteženo (formati)
   const tvMatchQ     = grpQ*cpp;                    // TV-vrednost pozornostnega dosega
-  const creatorLift  = S.credMult;                  // učinek creatorja (×)
-  const tvPenalty    = S.tvAttn? 1/S.tvAttn : 1;    // TV izgublja pozornost (×)
+  const creatorLift  = effMult;                     // učinek creatorja (× — upošteva stikalo)
+  const tvPenalty    = tvEff? 1/tvEff : 1;          // TV izgublja pozornost (× — upošteva stikalo)
   const combinedLift = creatorLift*tvPenalty;       // skupni multiplikator
   const afterCred    = tvMatchQ*creatorLift;
-  const realValue    = afterCred*tvPenalty;         // = tvMatchQ × credMult ÷ tvAttn
+  const realValue    = afterCred*tvPenalty;         // = tvMatchQ × creator ÷ TV_pozornost
   const realVsMedia  = media? realValue/media : 0;
   /* relevanca osebne blagovne znamke glede na Slovenijo */
   const pop      = S.popSI, fol=S.followers;
@@ -1277,10 +1292,6 @@ function renderExceptTableInputs(){
     rItem('≥ TV','<b>audio (podcast) pozornost je na ravni TV ali višja</b> — poslušanje je namensko (2/3 doma), z visokim priklicem in malo pasivnega drsanja.<span class="rsrc">Amplified Intelligence · Edison Research · EEG študije</span>'),
   ].join('');
 
-  /* sticky primerjava s TV */
-  document.getElementById('tvchip').innerHTML =
-    `1 epizoda ≈ <b>${nf1.format(d.grpTotal)} GRP</b><span class="sep"></span><b>${EUR(d.tvMatch)}</b> na TV`;
-
   /* relevanca glede na Slovenijo */
   document.getElementById('relev').innerHTML = [
     rtile(nf1.format(d.reachPct*100)+' %', 'populacije Slovenije doseže <b>ena epizoda</b> (surovi stiki '+N(d.reach)+' od '+N(d.pop)+')', Math.min(1,d.reachPct)),
@@ -1350,26 +1361,38 @@ function renderExceptTableInputs(){
       : callout('good', nf1.format(d.effCPM/d.cpt)+'×', 'razmerje pozornostne cene proti TV — praktično parnost; s ciljanjem in host-read zaupanjem to upravičuje TV-nivo cene.'),
   ].join('');
 
-  /* SKLEP — realna vrednost 1 epizode */
+  /* SKLEP — vrednost oglaševanja na TV za enak učinek */
   var sHigh = PRESETS[S.preset].sponsor[1];
+  var creOn = d.effMult>1, tvOn = d.tvEff<1;
   document.getElementById('bignum').textContent = EUR(d.realValue);
   document.getElementById('bigsub').innerHTML =
-    `≈ <b>${nf1.format(d.realVsMedia)}×</b> bruto medijske vrednosti (${EUR(d.media)})`
+    `Toliko bi moral oglaševalec <b>vložiti v TV</b>, da bi z današnjo (razdrobljeno) pozornostjo dosegel <b>enak oglasni učinek</b> kot ena epizoda. `
+    + `To je <b>${nf1.format(d.realVsMedia)}×</b> bruto medijske vrednosti (${EUR(d.media)})`
     + (sHigh>0 ? ` in <b>${nf1.format(d.realValue/sHigh)}×</b> nad zgornjo trenutno ceno sponzorja (${EUR(sHigh)})` : '')
-    + `. Pomeni <b>TV proračun, potreben za enak oglasni učinek</b> ene epizode danes.`;
+    + `.`;
+  document.getElementById('finformula').innerHTML =
+    `<b>vrednost</b> = ( kakov. doseg ÷ ciljna skupina × 100 ) × CPP × creator ÷ TV-pozornost<br>`
+    + `= ( ${N(d.qreach)} ÷ ${N(d.uni)} × 100 ) × ${EUR(d.cpp)} × ${nf2.format(d.creatorLift)} ÷ ${nf2.format(d.tvEff)}<br>`
+    + `= ${nf1.format(d.grpQ)} GRP × ${EUR(d.cpp)} × ${nf2.format(d.creatorLift)} ÷ ${nf2.format(d.tvEff)} = <b>${EUR(d.realValue)}</b>`;
   document.getElementById('finaletiles').innerHTML = [
-    ftile('pod','×'+nf2.format(d.creatorLift),'kredibilnostni učinek creatorja (host-read)'),
-    ftile('tv','×'+nf2.format(d.tvPenalty),'ker TV danes dostavi le '+nf0.format(S.tvAttn*100)+' % pozornosti'),
+    ftile('pod','×'+nf2.format(d.creatorLift), creOn?'kredibilnostni učinek creatorja (vključen)':'kredibilnostni učinek — izklopljen'),
+    ftile('tv','×'+nf2.format(d.tvPenalty), tvOn?('upad TV pozornosti — TV le '+nf0.format(S.tvAttn*100)+' %'):'TV pozornost — korekcija izklopljena'),
     ftile('sum','×'+nf2.format(d.combinedLift),'skupni multiplikator vrednosti'),
   ].join('');
   document.getElementById('finbridge').innerHTML = `
     ${buRow('base','TV-vrednost pozornostnega dosega','kakov. doseg '+N(d.qreach)+' → '+nf1.format(d.grpQ)+' GRP × CPP', EUR(d.tvMatchQ),'')}
-    ${buRow('add','× Kredibilnostni učinek','osebna bl. znamka ×'+nf2.format(d.creatorLift), '+'+EUR(d.afterCred-d.tvMatchQ),'')}
-    ${buRow('add','× Upad TV pozornosti','TV le '+nf0.format(S.tvAttn*100)+' % → ×'+nf2.format(d.tvPenalty), '+'+EUR(d.realValue-d.afterCred),'')}
-    ${buRow('res','Realna vrednost 1 epizode','z vsemi elementi', EUR(d.realValue),'')}
+    ${buRow('add','× Kredibilnostni učinek','osebna bl. znamka ×'+nf2.format(d.creatorLift), (d.afterCred-d.tvMatchQ>=0?'+':'')+EUR(d.afterCred-d.tvMatchQ),'')}
+    ${buRow('add','× Upad TV pozornosti',(tvOn?'TV le '+nf0.format(S.tvAttn*100)+' % → ':'')+'×'+nf2.format(d.tvPenalty), (d.realValue-d.afterCred>=0?'+':'')+EUR(d.realValue-d.afterCred),'')}
+    ${buRow('res','Vrednost za enak učinek na TV','končni znesek', EUR(d.realValue),'')}
   `;
+  document.getElementById('finhelp').innerHTML =
+    `<h4>Kako smo dobili to številko — in kaj pomeni</h4>`
+    + `Podcast najprej ustvari <b>pozornostno utežen (kakovostni) doseg</b>: vsak stik pomnožimo z utežjo formata (audio 1,10 · YouTube longplay 1,00 · drseči formati nižje), ker en poslušalec cele epizode ni enak enemu preletu Reela. `
+    + `Ta doseg pretvorimo v <b>TV GRP-ekvivalent</b> (delež ciljne skupine) in ovrednotimo po ceni ene GRP točke (CPP) — dobimo <b>TV-vrednost pozornostnega dosega</b> (${EUR(d.tvMatchQ)}). `
+    + `Nato dodamo dve strokovni korekciji: host-read/creator priporočilo proži <b>večji oglasni učinek</b> (×${nf2.format(d.effMult)}; raziskave: +50–67 % nakupne namere), televizija pa danes dostavi <b>manj resnične pozornosti</b> (${nf0.format(S.tvAttn*100)} % — drugi zaslon, upad linearne TV), zato je za enak učinek na njej treba vložiti sorazmerno več (÷${nf2.format(d.tvEff)}). `
+    + `<b>Rezultat je vrednost oglaševanja na TV za enak učinek</b> — koliko bi moral oglaševalec vložiti v televizijo za enak rezultat kot z eno epizodo. To <b>ni cena sponzorstva</b> (ta je nižja in izpogajana), temveč merilo dejanske vrednosti pojavnosti. Obe korekciji lahko izklopiš zgoraj in znesek se sproti spremeni.`;
   document.getElementById('findisc').innerHTML =
-    `<b>Strokovna argumentacija.</b> Znesek združuje vse elemente modela: pozornostno uteževanje formatov (audio 1,10 · YouTube 1,00 · drsni nižje), kredibilnostni učinek osebne blagovne znamke (×${nf2.format(d.creatorLift)}) in upad dejanske TV pozornosti (TV danes ${nf0.format(S.tvAttn*100)} %). Predstavlja <b>TV proračun za enak oglasni učinek</b> ene epizode danes — ne cene sponzorstva (ta je nižja; glej priporočeni razpon). Vsi faktorji so uredljivi prek drsnikov v modulih zgoraj.`;
+    `<b>Opomba.</b> Znesek ni uradni cenik in ne cena sponzorstva, temveč strokovna ocena vrednosti pojavnosti, izražena kot TV proračun za enak oglasni učinek. Vsi faktorji (CPM, uteži, CPP, oba multiplikatorja) so uredljivi; obe korekciji sta privzeto vključeni. Klikni <b>?</b> za razlago izračuna.`;
 
   /* build-up */
   document.getElementById('buildup').innerHTML = `
@@ -1600,6 +1623,17 @@ function bumpScenario(){
   document.getElementById('legalX').addEventListener('click',close);
   m.addEventListener('click',function(e){ if(e.target===m) close(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+
+/* ---------- "?" razlaga sklepnega izračuna ---------- */
+(function(){
+  var q=document.getElementById('finQ'), h=document.getElementById('finhelp');
+  if(!q||!h) return;
+  q.addEventListener('click',function(){
+    var open=h.hasAttribute('hidden');
+    if(open){ h.removeAttribute('hidden'); q.setAttribute('aria-expanded','true'); }
+    else { h.setAttribute('hidden',''); q.setAttribute('aria-expanded','false'); }
+  });
 })();
 
 /* ---------- init ---------- */
