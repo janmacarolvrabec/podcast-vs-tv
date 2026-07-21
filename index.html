@@ -405,6 +405,22 @@ footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-si
 .usebadge b{color:var(--ink);font-weight:750;font-variant-numeric:tabular-nums}
 .usebadge .mic-dot{width:8px;height:8px;border-radius:50%;background:var(--good);flex:none;animation:pulse 2.4s infinite}
 
+/* hero meta: povezave + avtor + družbena omrežja */
+.herometa{margin-top:16px;display:flex;flex-direction:column;gap:13px;align-items:flex-start}
+.hmbtns{display:flex;gap:10px;flex-wrap:wrap}
+.hmbtn{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:640;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:11px;padding:10px 15px;box-shadow:var(--shadow);
+  cursor:pointer;transition:border-color .12s,transform .12s}
+.hmbtn:hover{border-color:var(--tv);transform:translateY(-1px)}
+.hmbtn svg{width:17px;height:17px;flex:none}
+.hmauthor{font-size:13px;color:var(--ink-3)}
+.hmauthor b{color:var(--ink)}
+.hmsocial{display:flex;gap:8px}
+.hmsocial a{width:34px;height:34px;border-radius:9px;background:var(--surface);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--ink-2);transition:color .12s,border-color .12s,transform .12s}
+.hmsocial a:hover{color:var(--acc,var(--tv));border-color:var(--acc,var(--tv));transform:translateY(-1px)}
+.hmsocial svg{width:17px;height:17px;fill:currentColor}
+
 /* legal modal */
 .modal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:20px;
   background:rgba(10,15,22,.55);backdrop-filter:blur(3px)}
@@ -455,6 +471,25 @@ footer a{cursor:pointer}
     <h1>Koliko je vredna pojavnost na <span class="hl">podcastu</span>,<br>če jo merimo v <span class="hl2">TV valuti</span>?</h1>
     <p class="lead">Dashboard prevede doseg podcasta po posameznih omrežjih v tržno medijsko vrednost (CPM) in ga postavi ob bok načinu, kako se v Sloveniji prodaja TV oglaševanje — prek GRP točk in cene na tisoč kontaktov. Vse predpostavke so uredljive; privzeto so napolnjene z realnimi podatki podcasta <b>Macarol Show</b>.</p>
     <div class="usebadge"><span class="mic-dot"></span><b id="usecount">200</b>&nbsp;podcastov je bilo že ovrednotenih s tem kalkulatorjem</div>
+    <div class="herometa">
+      <div class="hmbtns">
+        <a class="hmbtn" href="#raziskave">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2.1" fill="var(--surface)"/><circle cx="15" cy="12" r="2.1" fill="var(--surface)"/><circle cx="8" cy="17" r="2.1" fill="var(--surface)"/></svg>
+          Metodologija izračunov
+        </a>
+        <a class="hmbtn" href="raziskava.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 8a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 17l-5-8V3"/><path d="M7.5 14h9"/></svg>
+          Raziskava
+        </a>
+      </div>
+      <div class="hmauthor">Avtor: <b>Jan Macarol</b> · voditelj podcasta Macarol Show, City Magazine</div>
+      <div class="hmsocial">
+        <a href="https://www.instagram.com/janmacarol/" target="_blank" rel="noopener" aria-label="Instagram" style="--acc:var(--f-instagram)"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.5 5.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg></a>
+        <a href="https://www.facebook.com/janmacarol" target="_blank" rel="noopener" aria-label="Facebook" style="--acc:var(--f-facebook)"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H17V3.6c-.3-.04-1.3-.13-2.46-.13-2.43 0-4.09 1.48-4.09 4.2v2.34H7.7V13h2.75v8h3.05z"/></svg></a>
+        <a href="https://www.linkedin.com/in/janmacarol/" target="_blank" rel="noopener" aria-label="LinkedIn" style="--acc:var(--f-linkedin)"><svg viewBox="0 0 24 24"><path d="M6.94 8.5H3.9V21h3.04V8.5zM5.42 3a1.76 1.76 0 1 0 0 3.53 1.76 1.76 0 0 0 0-3.53zM21 21h-3.04v-6.1c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.21V21h-3.03V8.5h2.91v1.71h.04c.41-.77 1.4-1.58 2.88-1.58 3.08 0 3.65 2.03 3.65 4.66V21z"/></svg></a>
+        <a href="https://x.com/JMacarolV" target="_blank" rel="noopener" aria-label="X" style="--acc:var(--ink)"><svg viewBox="0 0 24 24"><path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-6.06l-4.75-6.2L5.5 21H2.47l7.06-8.07L2.25 3h6.21l4.29 5.67L17.53 3zm-1.06 16.2h1.67L7.6 4.71H5.8l10.67 14.49z"/></svg></a>
+      </div>
+    </div>
   </div>
 
   <div class="kpis" id="kpis"></div>
