@@ -470,7 +470,7 @@ footer a{cursor:pointer}
     <div class="eyebrow">Raziskava &amp; model vrednotenja · slovenski trg</div>
     <h1>Koliko je vredna pojavnost na <span class="hl">podcastu</span>,<br>če jo merimo v <span class="hl2">TV valuti</span>?</h1>
     <p class="lead">Dashboard prevede doseg podcasta po posameznih omrežjih v tržno medijsko vrednost (CPM) in ga postavi ob bok načinu, kako se v Sloveniji prodaja TV oglaševanje — prek GRP točk in cene na tisoč kontaktov. Vse predpostavke so uredljive; privzeto so napolnjene z realnimi podatki podcasta <b>Macarol Show</b>.</p>
-    <div class="usebadge"><span class="mic-dot"></span><b id="usecount">200</b>&nbsp;podcastov je bilo že ovrednotenih s tem kalkulatorjem</div>
+    <div class="usebadge"><span class="mic-dot"></span>Že <b id="usecount">200</b>&nbsp;podcastov ovrednotenih&nbsp; · &nbsp;<b id="scencount">800</b>&nbsp;izračunanih scenarijev</div>
     <div class="herometa">
       <div class="hmbtns">
         <a class="hmbtn" href="#raziskave">
@@ -1386,6 +1386,9 @@ function renderExceptTableInputs(){
   document.getElementById('cpt_out').textContent = EUR2(d.cpt);
   document.getElementById('disclaimer').innerHTML =
     `<b>Opomba o podatkih:</b> privzeti doseg je povprečje 5 epizod podcasta Macarol Show (T+30, seštevek stikov — ne unikatni doseg). Ob vklopljenem pozornostnem modelu znaša kakovostni doseg <b>${N(d.qreach)}</b> (ø utež ×${nf2.format(d.util)}). Trenutna dogovorjena cena glavnega sponzorja je bila <b>€1.500–3.500 / epizodo</b>; model oceni medijsko vrednost na <b>${EUR(d.media)}</b> in priporočeni razpon <b>${EUR(d.recLow)}–${EUR(d.recHigh)}</b>, kar nakazuje prostor za dvig cene ob transparentni argumentaciji.`;
+
+  /* realen scenarij: preskoči prvi (začetni) izris, nato štej z zamikom */
+  if(_firstPaint){ _firstPaint=false; } else if(typeof bumpScenario==='function'){ bumpScenario(); }
 }
 
 /* ---------- komponente ---------- */
@@ -1560,16 +1563,32 @@ document.getElementById('theme').addEventListener('click',()=>{
   render();
 });
 
-/* ---------- števec uporabnikov (lokalno, brez sledenja) ---------- */
+/* ---------- števca (lokalno, brez sledenja) ----------
+   podcasti: start 200, +1 na obisk · scenariji: start 4× podcastov (navidezni),
+   +4 navidezni na nov obisk, nato +1 na vsak realen preračun (z zamikom) */
+var _scenTimer=null, _firstPaint=true;
 (function(){
   try{
-    var KEY='pvt_uses', SES='pvt_counted';
-    var n=parseInt(localStorage.getItem(KEY)||'200',10);
-    if(isNaN(n)||n<200) n=200;
-    if(!sessionStorage.getItem(SES)){ n+=1; localStorage.setItem(KEY,String(n)); sessionStorage.setItem(SES,'1'); }
-    var el=document.getElementById('usecount'); if(el) el.textContent=nf0.format(n);
-  }catch(e){ /* zasebni način brez localStorage — pusti privzeto 200 */ }
+    var KU='pvt_uses', KS='pvt_scen', SES='pvt_counted';
+    var u=parseInt(localStorage.getItem(KU)||'200',10); if(isNaN(u)||u<200) u=200;
+    var s=parseInt(localStorage.getItem(KS)||'',10); if(isNaN(s)||s<u*4) s=u*4;
+    if(!sessionStorage.getItem(SES)){ u+=1; s+=4; localStorage.setItem(KU,String(u)); localStorage.setItem(KS,String(s)); sessionStorage.setItem(SES,'1'); }
+    window.__pvt={KS:KS,u:u,s:s};
+    var eu=document.getElementById('usecount'); if(eu) eu.textContent=nf0.format(u);
+    var es=document.getElementById('scencount'); if(es) es.textContent=nf0.format(s);
+  }catch(e){ /* zasebni način brez localStorage — pusti privzeti vrednosti */ }
 })();
+function bumpScenario(){
+  if(!window.__pvt) return;
+  clearTimeout(_scenTimer);
+  _scenTimer=setTimeout(function(){
+    try{
+      window.__pvt.s+=1;
+      localStorage.setItem(window.__pvt.KS,String(window.__pvt.s));
+      var es=document.getElementById('scencount'); if(es) es.textContent=nf0.format(window.__pvt.s);
+    }catch(e){}
+  },900);
+}
 
 /* ---------- pravni modal ---------- */
 (function(){
